@@ -5,7 +5,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
-public class Gyro {
+public class Gyro implements ISensor {
     public BNO055IMU imu;
 
     public Gyro(HardwareMap hardwareMap){
@@ -17,9 +17,12 @@ public class Gyro {
         imu.initialize(parameters);
     }
 
-    public double getHeading(){
-        double angle = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
-        return angle;
+    public Double getData(){
+        return (double) imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+    }
+
+    public SensorTypes getType() {
+        return SensorTypes.Gyro;
     }
 
 }
