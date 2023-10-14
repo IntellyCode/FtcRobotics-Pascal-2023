@@ -18,7 +18,7 @@ apply from: '../build.dependencies.gradle'
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
     androidResources {
-        noCompress 'tflite'
+
     }
 
     packagingOptions {
