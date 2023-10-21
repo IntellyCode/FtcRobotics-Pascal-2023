@@ -1,30 +1,31 @@
 package org.firstinspires.ftc.teamcode.Components;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
+
+
 
 public abstract class ComponentAbstract {
     // Common variables for both Motion and Sensor components
     protected String componentName;
     protected boolean isActive = false;
 
-    Telemetry telemetry;
     // Constructor for initializing the component
-    public ComponentAbstract(String componentName, Telemetry telemetry) {
+    public ComponentAbstract(String componentName) {
         this.componentName = componentName;
-        this.telemetry = telemetry;
         activate();
     }
 
     // Common method to activate the component
     public void activate() {
         isActive = true;
-        telemetry.addLine(componentName + " is now active:");
+        TelemetryHelper.getTelemetry().addLine(componentName + " is now active:");
     }
 
     // Common method to deactivate the component
     public void deactivate() {
         isActive = false;
-        telemetry.addLine(componentName + " is now inactive:");
+        TelemetryHelper.getTelemetry().addLine(componentName + " is now inactive:");
     }
 
     // Common method to check if the component is active

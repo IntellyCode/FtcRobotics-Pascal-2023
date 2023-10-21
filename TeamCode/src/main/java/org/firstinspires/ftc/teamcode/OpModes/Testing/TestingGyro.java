@@ -17,8 +17,8 @@ public class TestingGyro extends OpMode {
     //test
     @Override
     public void loop() {
-        double angle = gyro.getHeading();
-        telemetry.addData("Angle",angle);
+        //double angle = gyro.getHeading();
+        //telemetry.addData("Angle",angle);
 
     }
 }

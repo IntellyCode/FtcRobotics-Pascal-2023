@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.Components;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Components.Sensors.SensorException;
 import org.firstinspires.ftc.teamcode.Controller.DataPackages.Sensors.SensorData;
 import org.firstinspires.ftc.teamcode.Controller.DataPackages.Sensors.SensorInfo;
@@ -11,8 +10,8 @@ public class SensorComponent extends ComponentAbstract{
 
     //The data package present in the SensorComponent
     SensorData sensorData;
-    public SensorComponent(String componentName, Telemetry telemetry) {
-        super(componentName,telemetry);
+    public SensorComponent(String componentName) {
+        super(componentName);
     }
 
     //Set the data package from the controller after a new ControllerData package is read
