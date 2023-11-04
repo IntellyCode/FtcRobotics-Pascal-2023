@@ -7,21 +7,20 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class TelemetryHelper {
     static Telemetry telemetry;
-    static Telemetry dashboardTelemetry;
+    static FtcDashboard dashboard;
     public static Telemetry getTelemetry() {
         return telemetry;
     }
 
-    public static Telemetry getDashboardTelemetry(){
-        return dashboardTelemetry;
+    public static FtcDashboard getDashboard(){
+        return dashboard;
     }
 
     public static void initTelemetry(Telemetry telemetry) {
-        FtcDashboard dashboard = FtcDashboard.getInstance();
 
         if(TelemetryHelper.telemetry == null) {
-            TelemetryHelper.dashboardTelemetry = dashboard.getTelemetry();
             TelemetryHelper.telemetry = telemetry;
+            dashboard = FtcDashboard.getInstance();
         }
     }
 }

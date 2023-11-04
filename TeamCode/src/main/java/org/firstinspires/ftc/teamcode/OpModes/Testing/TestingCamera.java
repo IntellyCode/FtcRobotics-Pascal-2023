@@ -6,7 +6,10 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Components.Sensors.Camera;
+import org.firstinspires.ftc.teamcode.Components.Sensors.Pipeline;
 import org.firstinspires.ftc.teamcode.TelemetryHelper;
+
+import java.nio.channels.Pipe;
 
 @TeleOp(name = "Testing Camera", group = "Testing")
 public class TestingCamera extends OpMode {
@@ -20,6 +23,7 @@ public class TestingCamera extends OpMode {
 
     @Override
     public void loop() {
-        TelemetryHelper.getDashboardTelemetry().addData("Telemtry helper",true);
+        telemetry.addData("Testing Camera",true);
+        telemetry.update();
     }
 }
