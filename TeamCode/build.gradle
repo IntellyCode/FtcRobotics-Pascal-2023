@@ -36,7 +36,7 @@ dependencies {
     implementation 'com.acmerobotics.roadrunner:core:0.5.6'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7'
     implementation 'org.openftc:easyopencv:1.7.0'
-    implementation('com.acmerobotics.dashboard:dashboard:0.4.13') {
+    implementation('com.acmerobotics.dashboard:dashboard:0.4.14') {
         exclude group: 'org.firstinspires.ftc'
     }
     implementation 'org.apache.commons:commons-math3:3.6.1'
