@@ -187,7 +187,7 @@ public class ConceptTensorFlowObjectDetection extends LinearOpMode {
 
         List<Recognition> currentRecognitions = tfod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());
-        TelemetryHelper.getDashboard().getTelemetry().addData("# Objects Detected", currentRecognitions.size());
+        //TelemetryHelper.getDashboard().getTelemetry().addData("# Objects Detected", currentRecognitions.size());
 
         // Step through the list of recognitions and display info for each one.
         for (Recognition recognition : currentRecognitions) {

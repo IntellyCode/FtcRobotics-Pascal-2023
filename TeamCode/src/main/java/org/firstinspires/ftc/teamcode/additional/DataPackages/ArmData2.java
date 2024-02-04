@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.additional.DataPackages;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Vector2d;
 import org.firstinspires.ftc.teamcode.Vector3d;
 
 @Config

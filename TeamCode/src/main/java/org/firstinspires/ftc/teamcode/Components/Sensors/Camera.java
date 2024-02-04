@@ -1,14 +1,11 @@
 package org.firstinspires.ftc.teamcode.Components.Sensors;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Camera.Pipeline;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
@@ -23,7 +20,7 @@ public class Camera {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         this.webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         webcam = OpenCvCameraFactory.getInstance().createWebcam(this.webcamName,cameraMonitorViewId);
-        this.pipeline = new Pipeline(webcam);
+        this.pipeline = new Pipeline();
         webcam.setPipeline(pipeline);
         webcam.setMillisecondsPermissionTimeout(5000);
     }
@@ -35,7 +32,7 @@ public class Camera {
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                webcam.startStreaming(640,480, OpenCvCameraRotation.UPSIDE_DOWN);
+                webcam.startStreaming(752,416, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override

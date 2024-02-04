@@ -4,9 +4,6 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Vector2d;
-import org.firstinspires.ftc.teamcode.Vector3d;
-
 public class BeltData {
     public float ticksCap;
     DcMotorEx rightBelt;
