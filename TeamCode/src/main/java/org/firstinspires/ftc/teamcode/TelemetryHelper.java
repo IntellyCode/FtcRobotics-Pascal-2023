@@ -6,21 +6,23 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class TelemetryHelper {
-    static Telemetry telemetry;
     static FtcDashboard dashboard;
-    public static Telemetry getTelemetry() {
-        return telemetry;
+    static TelemetryPacket dashBoardTelemetry;
+    static Telemetry telemetry;
+
+    public static TelemetryPacket getDashboardTelemetry() {
+        return dashBoardTelemetry;
+    }
+    public static Telemetry getTelemetry() { return telemetry; }
+
+    public static void initTelemetry(Telemetry initTelemetry) {
+        dashboard = FtcDashboard.getInstance();
+        dashBoardTelemetry = new TelemetryPacket();
+        telemetry = initTelemetry;
     }
 
-    public static FtcDashboard getDashboard(){
-        return dashboard;
-    }
-
-    public static void initTelemetry(Telemetry telemetry) {
-
-        if(TelemetryHelper.telemetry == null) {
-            TelemetryHelper.telemetry = telemetry;
-            dashboard = FtcDashboard.getInstance();
-        }
+    public static void update() {
+        telemetry.update();
+        dashboard.sendTelemetryPacket(dashBoardTelemetry);
     }
 }
