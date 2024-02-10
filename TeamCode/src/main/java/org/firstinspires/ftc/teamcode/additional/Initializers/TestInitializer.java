@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.additional.Actions.PickupPixel;
 import org.firstinspires.ftc.teamcode.additional.DataPackages.BeltData;
-import org.firstinspires.ftc.teamcode.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 
 @Autonomous
 public class TestInitializer extends OpMode {

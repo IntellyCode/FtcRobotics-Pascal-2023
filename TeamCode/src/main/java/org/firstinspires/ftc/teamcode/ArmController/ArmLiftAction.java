@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.ArmController;
 
-import org.firstinspires.ftc.teamcode.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 
 //This one uses outer-open inner-closed loop for estimating actual arm position;
 public class ArmLiftAction {

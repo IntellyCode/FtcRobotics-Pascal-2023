@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode.additional.Controllers;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.TelemetryHelper;
-import org.firstinspires.ftc.teamcode.Vector3d;
+import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.Common.Vector3d;
 
 public class PIDController {
     ElapsedTime elapsedTime;

@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.teamcode.additional.DataPackages.SmallRobotArmData;
 import org.firstinspires.ftc.teamcode.additional.Controllers.PIDController;
-import org.firstinspires.ftc.teamcode.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 
 public class LiftToAngle implements IAction {
     SmallRobotArmData smallRobotArmData;

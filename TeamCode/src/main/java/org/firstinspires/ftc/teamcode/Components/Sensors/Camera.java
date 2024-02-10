@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Camera.Pipeline;
+import org.firstinspires.ftc.teamcode.Common.Team;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -14,13 +15,13 @@ public class Camera {
     OpenCvWebcam webcam;
 
     WebcamName webcamName;
-    public Pipeline pipeline;
+    Pipeline pipeline;
 
-    public Camera(HardwareMap hardwareMap){
+    public Camera(HardwareMap hardwareMap, Team team){
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         this.webcamName = hardwareMap.get(WebcamName.class, "Webcam 1");
         webcam = OpenCvCameraFactory.getInstance().createWebcam(this.webcamName,cameraMonitorViewId);
-        this.pipeline = new Pipeline();
+        this.pipeline = new Pipeline(team);
         webcam.setPipeline(pipeline);
         webcam.setMillisecondsPermissionTimeout(5000);
     }
@@ -32,7 +33,7 @@ public class Camera {
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                webcam.startStreaming(752,416, OpenCvCameraRotation.UPRIGHT);
+                webcam.startStreaming(752,416, OpenCvCameraRotation.UPSIDE_DOWN);
             }
 
             @Override
@@ -40,4 +41,9 @@ public class Camera {
             }
         });
     }
+
+    public Pipeline getPipeline(){
+        return this.pipeline;
+    }
+
 }

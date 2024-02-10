@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.Camera.Util;
 
-import org.firstinspires.ftc.teamcode.TelemetryHelper;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -19,8 +18,8 @@ import java.util.stream.Collectors;
 
 public class ColorDetection {
 
+    RelativePosition relPos;
     ColorRange colorRange;
-
     ColorRange offsetRange;
     public ColorDetection(ColorRange colorRange) {
         this.colorRange = colorRange;
@@ -111,16 +110,18 @@ public class ColorDetection {
                 new Scalar(0, 255, 0),
                 -1
         );
-        RelativePosition relative_position = this.getRelativePosition(center,processedImage);
-        //TelemetryHelper.getDashboardTelemetry().addLine(relative_position.toString());
-        TelemetryHelper.getTelemetry().addData("Position",relative_position.toString());
+        relPos = this.getRelativePosition(center,processedImage);
+        /*
+        TelemetryHelper.getDashboardTelemetry().addLine(relative_position.toString());
+        TelemetryHelper.getTelemetry().addData("Position",relPos.toString());
+        */
         grayImage.release();
         return processedImage;
     }
 
-    public RelativePosition getRelativePosition (Point center, Mat image){
+    private RelativePosition getRelativePosition (Point center, Mat image){
 
-        Point imageCenter = new Point(image.cols() / 2, image.rows() / 2);
+        Point imageCenter = new Point((float)image.cols() / 2, (float)image.rows() / 2);
 
         if (imageCenter.x + 100 < center.x) {
             return RelativePosition.right;
@@ -129,6 +130,9 @@ public class ColorDetection {
         } else {
             return RelativePosition.center;
         }
+    }
+    public RelativePosition getRelativePosition(){
+        return this.relPos;
     }
 
 }

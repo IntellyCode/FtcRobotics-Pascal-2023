@@ -1,13 +1,12 @@
 package org.firstinspires.ftc.teamcode.additional.DataPackages;
 
 import com.acmerobotics.dashboard.config.Config;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.Vector3d;
+import org.firstinspires.ftc.teamcode.Common.Vector3d;
 
 @Config
 public class BigRobotArmData {

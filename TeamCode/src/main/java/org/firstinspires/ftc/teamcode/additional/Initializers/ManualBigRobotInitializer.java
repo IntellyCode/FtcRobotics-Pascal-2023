@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules.ManualBeltModule;
 import org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules.ManualDriveModule;
-import org.firstinspires.ftc.teamcode.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 
 @TeleOp
 

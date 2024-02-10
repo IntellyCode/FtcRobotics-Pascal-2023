@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Components.Sensors.Camera;
-import org.firstinspires.ftc.teamcode.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.Common.Team;
+import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 
 
 
@@ -15,7 +16,7 @@ public class TestingCamera extends OpMode {
     @Override
     public void init(){
         TelemetryHelper.initTelemetry(telemetry);
-        camera = new Camera(hardwareMap);
+        camera = new Camera(hardwareMap, Team.red);
         camera.start();
     }
 

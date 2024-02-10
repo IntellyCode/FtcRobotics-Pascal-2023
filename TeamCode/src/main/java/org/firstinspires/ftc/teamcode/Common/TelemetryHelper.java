@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Common;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
@@ -24,6 +24,7 @@ public class TelemetryHelper {
     public static void update() {
         telemetry.update();
         dashboard.sendTelemetryPacket(dashBoardTelemetry);
+        dashBoardTelemetry.clearLines();
     }
 
     public static FtcDashboard getDashboard(){

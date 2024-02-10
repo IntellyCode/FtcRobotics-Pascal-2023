@@ -1,40 +1,52 @@
-package org.firstinspires.ftc.teamcode.additional.Initializers;
+package org.firstinspires.ftc.teamcode.OpModes.Testing;
+
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.Camera.Util.RelativePosition;
+import org.firstinspires.ftc.teamcode.Common.Coordinates;
+import org.firstinspires.ftc.teamcode.Components.Sensors.Camera;
+import org.firstinspires.ftc.teamcode.Common.Team;
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 import org.firstinspires.ftc.teamcode.additional.Actions.IAction;
 import org.firstinspires.ftc.teamcode.additional.Actions.MoveToPosition;
 import org.firstinspires.ftc.teamcode.additional.drive.SampleMecanumDrive;
 
-@Autonomous
-public class ActionTestingInitializer extends OpMode {
+
+@TeleOp(name = "InitRed", group = "Testing")
+public class InitRed extends OpMode {
+    RelativePosition rlp;
+    Team team = Team.red;
     IAction action;
     SampleMecanumDrive drive;
-
     @Override
-    public void init() {
+    public void init(){
+        Camera camera =new Camera(hardwareMap,team);
         TelemetryHelper.initTelemetry(telemetry);
         drive = new SampleMecanumDrive(hardwareMap);
+        camera.start();
+        rlp = camera.getPipeline().getRelPosOfProp();
     }
 
     @Override
     public void loop() {
+
         if(gamepad1.cross) {
-            action = new MoveToPosition(drive, new Pose2d(100, 0, 0));
+            action = new MoveToPosition(drive, Coordinates.getParkingPosition(this.rlp));
             action.start();
         }
-        if(gamepad1.circle) {
-            action = new MoveToPosition(drive, new Pose2d(0, 100, 0));
-            action.start();
-        }
+
         if(action != null) {
             TelemetryHelper.getTelemetry().addData("Is finished", action.isOver());
             action.update();
         }
-
+        TelemetryHelper.getDashboardTelemetry().put("Position",rlp);
         TelemetryHelper.update();
     }
+
+
+
+
 }
