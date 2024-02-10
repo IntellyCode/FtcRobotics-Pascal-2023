@@ -25,4 +25,8 @@ public class TelemetryHelper {
         telemetry.update();
         dashboard.sendTelemetryPacket(dashBoardTelemetry);
     }
+
+    public static FtcDashboard getDashboard(){
+        return dashboard;
+    }
 }
