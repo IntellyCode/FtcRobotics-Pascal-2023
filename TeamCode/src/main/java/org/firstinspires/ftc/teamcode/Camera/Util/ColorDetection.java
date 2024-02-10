@@ -18,14 +18,20 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ColorDetection {
-    Scalar lowHsv;
-    Scalar highHsv;
+
+    ColorRange colorRange;
+
+    ColorRange offsetRange;
     public ColorDetection(ColorRange colorRange) {
-        lowHsv = colorRange.getLow();
-        highHsv = colorRange.getHigh();
+        this.colorRange = colorRange;
     }
 
-    public Mat extractColors(final Mat src) {
+    public ColorDetection(ColorRange colorRange,ColorRange offsetRange) {
+        this.colorRange = colorRange;
+        this.offsetRange = offsetRange;
+    }
+
+    public Mat extractColors( Mat src) {
         Mat hsv = new Mat();
         Imgproc.cvtColor(src, hsv, Imgproc.COLOR_RGB2HSV);
         /*
@@ -35,7 +41,12 @@ public class ColorDetection {
          */
 
         Mat mask = new Mat();
-        Core.inRange(hsv, lowHsv, highHsv, mask);
+        Core.inRange(hsv, colorRange.getLow(), colorRange.getHigh(), mask);
+        if (offsetRange!=null){
+            Mat mask2 = new Mat();
+            Core.inRange(hsv, offsetRange.getLow(), offsetRange.getHigh(), mask2);
+            Core.add(mask, mask2, mask);
+        }
 
         // Apply a morphological closing operation to fill small gaps in the detected contour
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new Size(3, 3));
@@ -43,9 +54,11 @@ public class ColorDetection {
 
         Mat result = new Mat();
         src.copyTo(result, mask);
-
-
+        hsv.release();
+        mask.release();
+        kernel.release();
         return result;
+
     }
 
 
@@ -101,6 +114,7 @@ public class ColorDetection {
         RelativePosition relative_position = this.getRelativePosition(center,processedImage);
         //TelemetryHelper.getDashboardTelemetry().addLine(relative_position.toString());
         TelemetryHelper.getTelemetry().addData("Position",relative_position.toString());
+        grayImage.release();
         return processedImage;
     }
 
