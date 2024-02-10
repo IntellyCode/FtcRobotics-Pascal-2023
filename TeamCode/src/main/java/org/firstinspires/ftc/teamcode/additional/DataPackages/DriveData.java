@@ -33,8 +33,8 @@ public class DriveData {
     }
     public DriveData(HardwareMap map) {
         upperLeft = map.get(DcMotorEx.class, "upperRight");
-        upperRight = map.get(DcMotorEx.class, "upperLeft");
-        lowerLeft = map.get(DcMotorEx.class, "lowerRight/perpendicularEncoder");
+        upperRight = map.get(DcMotorEx.class, "upperLeft/perpendicularEncoder");
+        lowerLeft = map.get(DcMotorEx.class, "lowerRight");
         lowerRight = map.get(DcMotorEx.class, "lowerLeft/parallelEncoder");
 
         upperLeft.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);

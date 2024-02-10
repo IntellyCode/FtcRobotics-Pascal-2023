@@ -26,9 +26,7 @@ public class ManualBigRobotArmModule implements IDecisionModule {
         } else upperPower = 0;
 
         bigRobotArmData.getLowerArmMotor().setPower(lowerPower);
-
-
-
+        bigRobotArmData.getUpperArmMotor().setPower(upperPower);
 
         if(gamepad1.left_bumper) cleshnjaY = -0.5;
         if(gamepad1.right_bumper) cleshnjaY = 0.5;
