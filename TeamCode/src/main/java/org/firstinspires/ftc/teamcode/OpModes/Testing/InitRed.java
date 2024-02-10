@@ -17,22 +17,27 @@ import org.firstinspires.ftc.teamcode.additional.drive.SampleMecanumDrive;
 
 @TeleOp(name = "InitRed", group = "Testing")
 public class InitRed extends OpMode {
+
+    Camera camera;
     RelativePosition rlp;
     Team team = Team.red;
     IAction action;
     SampleMecanumDrive drive;
     @Override
     public void init(){
-        Camera camera =new Camera(hardwareMap,team);
+        camera =new Camera(hardwareMap,team);
         TelemetryHelper.initTelemetry(telemetry);
         drive = new SampleMecanumDrive(hardwareMap);
         camera.start();
-        rlp = camera.getPipeline().getRelPosOfProp();
+
     }
 
     @Override
     public void loop() {
 
+        if (rlp==null){
+            rlp = camera.getPipeline().getRelPosOfProp();
+        }
         if(gamepad1.cross) {
             action = new MoveToPosition(drive, Coordinates.getParkingPosition(this.rlp));
             action.start();
