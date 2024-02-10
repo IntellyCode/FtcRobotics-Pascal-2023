@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-
 public class Vector3d {
     public double x;
     public double y;

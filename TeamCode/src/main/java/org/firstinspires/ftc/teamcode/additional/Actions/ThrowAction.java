@@ -2,8 +2,7 @@ package org.firstinspires.ftc.teamcode.additional.Actions;
 
 import org.firstinspires.ftc.teamcode.additional.DataPackages.PlaneLauncherData;
 
-public class ThrowAction implements IAction{
-    boolean isStarted;
+public class ThrowAction implements IAction {
     boolean isFinished;
     PlaneLauncherData data;
     @Override
@@ -26,8 +25,4 @@ public class ThrowAction implements IAction{
         return isFinished;
     }
 
-    @Override
-    public boolean isStarted() {
-        return isStarted;
-    }
 }

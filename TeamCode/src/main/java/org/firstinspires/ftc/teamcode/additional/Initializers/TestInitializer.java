@@ -23,10 +23,9 @@ public class TestInitializer extends OpMode {
     public void loop() {
         if(gamepad1.x) {
             pickupPixel.start();
-
         }
-        if(pickupPixel.isStarted())
-            pickupPixel.update();
+//        if(pickupPixel.isStarted())
+//            pickupPixel.update();
 
         TelemetryHelper.update();
     }

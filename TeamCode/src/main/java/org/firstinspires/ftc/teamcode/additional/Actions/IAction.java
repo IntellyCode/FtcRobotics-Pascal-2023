@@ -9,5 +9,4 @@ public interface IAction {
 
     //Is the function over?
     boolean isOver();
-    boolean isStarted();
 }

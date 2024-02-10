@@ -2,24 +2,23 @@ package org.firstinspires.ftc.teamcode.additional.Actions;
 
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-import org.firstinspires.ftc.teamcode.additional.DataPackages.ArmData;
+import org.firstinspires.ftc.teamcode.additional.DataPackages.SmallRobotArmData;
 import org.firstinspires.ftc.teamcode.additional.Controllers.PIDController;
 import org.firstinspires.ftc.teamcode.TelemetryHelper;
 
 public class LiftToAngle implements IAction {
-    ArmData armData;
+    SmallRobotArmData smallRobotArmData;
     DcMotorEx leftMotor;
     DcMotorEx rightMotor;
     PIDController controller;
-    boolean isStarted;
     boolean isFinished;
     double targetAngle;
-    public LiftToAngle(ArmData armData, double targetAngle) {
-        this.armData = armData;
+    public LiftToAngle(SmallRobotArmData smallRobotArmData, double targetAngle) {
+        this.smallRobotArmData = smallRobotArmData;
         this.targetAngle = targetAngle;
-        leftMotor = armData.getLeftArmMotor();
-        rightMotor = armData.getRightArmMotor();
-        controller = new PIDController(armData.getPIDCoefficients());
+        leftMotor = smallRobotArmData.getLeftArmMotor();
+        rightMotor = smallRobotArmData.getRightArmMotor();
+        controller = new PIDController(smallRobotArmData.getPIDCoefficients());
     }
 
     @Override
@@ -30,8 +29,8 @@ public class LiftToAngle implements IAction {
     public void update() {
         TelemetryHelper.getDashboardTelemetry().put("Target angle: ", targetAngle);
 
-        double currentAngle = calculateCurrentAngle(armData.getLeftArmMotor().getCurrentPosition());
-        armData.currentAngle = currentAngle;
+        double currentAngle = calculateCurrentAngle(smallRobotArmData.getLeftArmMotor().getCurrentPosition());
+        //smallRobotArmData.currentAngle = currentAngle;
         TelemetryHelper.getDashboardTelemetry().put("Current angle: ", currentAngle);
 
         double output = controller.update(targetAngle, currentAngle);
@@ -43,18 +42,9 @@ public class LiftToAngle implements IAction {
     public boolean isOver() {
         return isFinished;
     }
-
-    @Override
-    public boolean isStarted() {
-        return isStarted;
-    }
-
-//    int calculateTargetTicks(double targetAngle) {
-//        return (int) (2*Math.PI*targetAngle)/armData.ticksPerRev;
-//    }
-
     double calculateCurrentAngle(int ticks) {
-        return (armData.ticksPerRev*ticks)/(2*Math.PI);
+        //return (smallRobotArmData.ticksPerRev*ticks)/(2*Math.PI);
+        return 0.0f;
     }
 
     //double feedforwardOutput() {

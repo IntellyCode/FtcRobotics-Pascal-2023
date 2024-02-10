@@ -38,9 +38,4 @@ public class PickupPixel implements IAction {
     public boolean isOver() {
         return isOver;
     }
-
-    @Override
-    public boolean isStarted() {
-        return isStarted;
-    }
 }

@@ -1,7 +1,11 @@
-package org.firstinspires.ftc.teamcode.additional.Actions;
+package org.firstinspires.ftc.teamcode;
 
 import java.util.List;
 
+/*
+This implementation of IAction allows to combine multiple actions happening at the same time
+When every action finished - so does the ComplexAction.
+*/
 public class ComplexAction implements IAction{
     List<IAction> ongoingActions;
     public List<IAction> getOngoingActions() {
@@ -16,9 +20,10 @@ public class ComplexAction implements IAction{
     public ComplexAction(List<IAction> actions) {
         ongoingActions = actions;
     }
-    boolean isFinished;
+
+    boolean over;
     public boolean isOver() {
-        return isFinished;
+        return over;
     }
 
     //Start every action
@@ -31,7 +36,7 @@ public class ComplexAction implements IAction{
     //Updates every action and checks is finished.
     @Override
     public void update() {
-        if(isFinished) return;
+        if(over) return;
 
         for (IAction action : ongoingActions) {
             if(action.isOver()) {
@@ -43,6 +48,6 @@ public class ComplexAction implements IAction{
         }
 
         if(ongoingActions.size() == 0)
-            isFinished = true;
+            over = true;
     }
 }
