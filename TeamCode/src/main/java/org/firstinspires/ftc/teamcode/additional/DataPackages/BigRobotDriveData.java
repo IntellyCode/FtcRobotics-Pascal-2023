@@ -4,7 +4,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.DistanceSensor;
+
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Common.Vector3d;
@@ -27,13 +27,13 @@ public class BigRobotDriveData {
     public DcMotorEx getLowerRight() {
         return lowerRight;
     }
-    public DistanceSensor distanceSensor;
+    //public DistanceSensor distanceSensor;
     public BigRobotDriveData(HardwareMap map) {
         upperRight = map.get(DcMotorEx.class, "upperRight/parallelEncoder");
         upperLeft = map.get(DcMotorEx.class, "upperLeft/perpendicularEncoder");
         lowerLeft = map.get(DcMotorEx.class, "lowerLeft");
         lowerRight = map.get(DcMotorEx.class, "lowerRight");
-        distanceSensor = map.get(DistanceSensor.class, "distanceSensor");
+
 
         upperRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         upperLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

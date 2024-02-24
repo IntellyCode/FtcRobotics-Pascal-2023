@@ -5,26 +5,34 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.Components.Sensors.BigRobotSensorData;
 import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotDriveData;
 
 public class BigRobotManualDrive implements IDecisionModule {
     BigRobotDriveData bigRobotDriveData;
+
+    BigRobotSensorData bigRobotSensorData;
     Gamepad gamepad1;
 
-    double x;
-    double y;
+    double x = 0;
+    double y = 0;
     double turn;
 
     public BigRobotManualDrive(HardwareMap map, Gamepad gamepad1) {
         bigRobotDriveData = new BigRobotDriveData(map);
+        bigRobotSensorData = new BigRobotSensorData(map);
         this.gamepad1 = gamepad1;
     }
     @Override
     public void controlLoop() {
         //Data reading
-        x = gamepad1.left_stick_x;
-        y = gamepad1.left_stick_y;
-        turn = gamepad1.right_stick_x;
+
+        x += gamepad1.left_stick_x*0.25;
+        y += gamepad1.left_stick_y*0.25;
+        turn += gamepad1.right_stick_x*0.25;
+        x = outOfRange(x);
+        y = outOfRange(y);
+        turn = outOfRange(turn);
 
         TelemetryHelper.getTelemetry().addData("x", x);
         TelemetryHelper.getTelemetry().addData("y", y);
@@ -49,7 +57,19 @@ public class BigRobotManualDrive implements IDecisionModule {
         TelemetryHelper.getTelemetry().addData("Enabled:", bigRobotDriveData.getLowerLeft().isMotorEnabled());
 
         //Haptic feedback
-        if(bigRobotDriveData.distanceSensor.getDistance(DistanceUnit.CM) < 30)
+       if(bigRobotSensorData.getDistance() < 30)
             gamepad1.rumble(100);
+
+
+    }
+
+    private double outOfRange(double value){
+        if (value > 1){
+            return 1;
+        }
+        if (value < -1){
+            return -1;
+        }
+        return value;
     }
 }

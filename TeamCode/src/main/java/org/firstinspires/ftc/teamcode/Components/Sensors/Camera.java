@@ -33,7 +33,7 @@ public class Camera {
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                webcam.startStreaming(752,416, OpenCvCameraRotation.UPSIDE_DOWN);
+                webcam.startStreaming(752,416, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
