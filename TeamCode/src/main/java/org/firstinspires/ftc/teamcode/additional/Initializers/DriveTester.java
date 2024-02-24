@@ -36,7 +36,6 @@ public class DriveTester extends OpMode {
             action.update();
         }
         drive.update();
-        drive.update();
         TelemetryHelper.update();
     }
 }

@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.additional.Actions.ExtendTheArmAction;
 import org.firstinspires.ftc.teamcode.additional.Actions.IAction;
 import org.firstinspires.ftc.teamcode.additional.Actions.LiftToAngleBigRobot;
 import org.firstinspires.ftc.teamcode.additional.Actions.SequencedAction;
+import org.firstinspires.ftc.teamcode.additional.Actions.ThrowPlaneAction;
 import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotArmData;
 
 @TeleOp
@@ -34,19 +35,19 @@ public class ArmTester extends OpMode {
 //            currAction = new ExtendTheArmAction(data, 70);
 //            currAction.start();
 //        }
-//        else if(gamepad1.circle) {
-//            currAction = new ExtendTheArmAction(data, 42);
-//            currAction.start();
-//        }
-//        else if(gamepad1.triangle) {
-//            currAction = new LiftToAngleBigRobot(data, 45);
-//            currAction.start();
-//        }
-//        else if(gamepad1.square) {
-//            currAction = new LiftToAngleBigRobot(data, 0);
-//            currAction.start();
-//        }
-//
+        else if(gamepad1.circle) {
+            currAction = new ExtendTheArmAction(data, 42);
+            currAction.start();
+        }
+        else if(gamepad1.triangle) {
+            currAction = new LiftToAngleBigRobot(data, 45);
+            currAction.start();
+        }
+        else if(gamepad1.square) {
+            currAction = new ThrowPlaneAction(data);
+            currAction.start();
+        }
+
         TelemetryHelper.update();
         if(currAction != null)
         {

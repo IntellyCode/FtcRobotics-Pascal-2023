@@ -4,9 +4,12 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.additional.Actions.LiftToAngleBigRobot;
 import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotArmData;
 
 public class BigRobotManualArmModule implements IDecisionModule {
+    LiftToAngleBigRobot liftAction;
+    double targetAngle;
     boolean cleshnjaClosed;
     Gamepad gamepad1;
     BigRobotArmData bigRobotArmData;
@@ -19,43 +22,55 @@ public class BigRobotManualArmModule implements IDecisionModule {
 
     @Override
     public void controlLoop() {
+        TelemetryHelper.getTelemetry().addData("R Servo pos", bigRobotArmData.getClawServoRight().getPosition());
+        TelemetryHelper.getTelemetry().addData("L Servo pos", bigRobotArmData.getClawServoLeft().getPosition());
         //Haptic feedback
 
         //Lower motor control
-        double lowerPower = 0.5*(gamepad1.right_trigger - gamepad1.left_trigger);
-        TelemetryHelper.getTelemetry().addData("lower power:", lowerPower);
-        TelemetryHelper.getTelemetry().addData("currposleft", bigRobotArmData.getLowerArmMotor().getCurrentPosition());
-        TelemetryHelper.getTelemetry().addData("currposright:", bigRobotArmData.getLowerArmMotor().getCurrentPosition());
-        if((bigRobotArmData.getLowerArmMotor().getCurrentPosition() > bigRobotArmData.lowerMotorTicksUpperBound) && lowerPower > 0)
-            lowerPower = 0;
-        if((bigRobotArmData.getLowerArmMotor().getCurrentPosition() < bigRobotArmData.lowerMotorTicksLowerBound) && lowerPower < 0)
-            lowerPower = 0;
-        TelemetryHelper.getTelemetry().addData("lower after:", lowerPower);
-        bigRobotArmData.getLowerArmMotor().setPower(lowerPower);
-        TelemetryHelper.getTelemetry().addData("Lower m ticks:", bigRobotArmData.getLowerArmMotor().getCurrentPosition());
+        targetAngle += (gamepad1.right_trigger - gamepad1.left_trigger)*3;
+        if(targetAngle > 45)
+            targetAngle = 45;
+        if(targetAngle < 0)
+            targetAngle = 0;
+
+        liftAction = new LiftToAngleBigRobot(bigRobotArmData, targetAngle);
+        liftAction.start();
+        TelemetryHelper.getTelemetry().addData("Target angle", targetAngle);
+        TelemetryHelper.getTelemetry().addData("current angle", bigRobotArmData.currentAngle);
+        TelemetryHelper.getTelemetry().addData("rightTrigger", gamepad1.right_trigger);
+        TelemetryHelper.getTelemetry().addData("leftTrigger", gamepad1.left_trigger);
 
         //Upper arm control
         double upperPower = 0f;
         if(gamepad1.dpad_up) {
-            upperPower = -1f;
-        } else if(gamepad1.dpad_down) upperPower = 1f;
-        else upperPower = 0f;
+            upperPower = 1f;
+        } else if(gamepad1.dpad_down) upperPower = -1f;
+
+        if((bigRobotArmData.getUpperArmMotor().getCurrentPosition() > bigRobotArmData.upperMotorTicksUpperBound ) && upperPower > 0)
+            upperPower = 0;
+        else if((bigRobotArmData.getUpperArmMotor().getCurrentPosition() < bigRobotArmData.lowerMotorTicksLowerBound) && upperPower < 0 )
+            upperPower = 0;
+
         bigRobotArmData.getUpperArmMotor().setPower(upperPower);
         TelemetryHelper.getTelemetry().addData("Upper m ticks:", bigRobotArmData.getUpperArmMotor().getCurrentPosition());
 
+        if(gamepad1.options) {
 
+        }
         //Cleshnja control
         if(gamepad1.square) cleshnjaClosed = false;
         if(gamepad1.circle) cleshnjaClosed = true;
 
         if(cleshnjaClosed) {
-            bigRobotArmData.getClawServoLeft().setPosition(0);
-            bigRobotArmData.getClawServoRight().setPosition(1);
-        }
-        else {
             bigRobotArmData.getClawServoLeft().setPosition(1);
             bigRobotArmData.getClawServoRight().setPosition(0);
         }
+        else {
+            bigRobotArmData.getClawServoLeft().setPosition(0);
+            bigRobotArmData.getClawServoRight().setPosition(1);
+        }
+        if(liftAction != null)
+            liftAction.update();
         bigRobotArmData.localize();
     }
 }

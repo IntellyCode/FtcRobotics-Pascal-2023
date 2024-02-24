@@ -22,7 +22,7 @@ public class SmallRobotManualDriveModule implements IDecisionModule {
     @Override
     public void controlLoop() {
         //Data reading
-        x = -gamepad1.left_stick_x;
+        x = gamepad1.left_stick_x;
         y = -gamepad1.left_stick_y;
         turn = gamepad1.right_stick_x;
 
@@ -45,6 +45,8 @@ public class SmallRobotManualDriveModule implements IDecisionModule {
         smallRobotDriveData.getLowerLeft().setPower(llPower / denominator);
         smallRobotDriveData.getUpperRight().setPower(urPower / denominator);
         smallRobotDriveData.getLowerRight().setPower(lrPower / denominator);
+
+
     }
 }
 

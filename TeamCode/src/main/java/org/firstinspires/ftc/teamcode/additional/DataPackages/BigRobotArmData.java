@@ -34,10 +34,12 @@ public class BigRobotArmData {
     public DcMotorEx getUpperArmMotor() {
         return upperArmMotor;
     }
-    public final int upperMotorTicksLowerBound = -1000;
-    public final int upperMotorTicksUpperBound = 1000;
+    public final int upperMotorTicksUpperBound = 6000;
+    public final int upperMotorTicksLowerBound = 0;
     public final double upperMotorGearRatio = 1.0f/4.5f;
     public final double ticksPerCm = -94.492;
+
+
 
         //Coordinates
     public final double initialArmLength = 42;
@@ -58,6 +60,11 @@ public class BigRobotArmData {
     public final double initialAngle = 0;
     public double currentAngle = initialAngle;
 
+    //Plane launcher
+    Servo planeLauncher;
+    public Servo getPlaneLauncher() {
+        return planeLauncher;
+    }
 
     public BigRobotArmData(HardwareMap map) {
         lowerArmMotor = map.get(DcMotorEx.class, "lowerArmMotor");
@@ -65,6 +72,7 @@ public class BigRobotArmData {
         clawServoRight = map.get(Servo.class, "clawServoRight");
         clawServoLeft = map.get(Servo.class, "clawServoLeft");
         sweeperServo = map.get(Servo.class, "sweeperServo");
+        planeLauncher = map.get(Servo.class, "planeLauncher");
 
         lowerArmMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         upperArmMotor.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
@@ -73,10 +81,14 @@ public class BigRobotArmData {
         upperArmMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
 
         lowerArmMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        upperArmMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        //upperArmMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         lowerArmMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         upperArmMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+
+        clawServoRight.setPosition(1);
+        clawServoLeft.setPosition(0);
+
     }
 
     public void localize() {

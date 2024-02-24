@@ -19,14 +19,15 @@ public class LiftToAngleBigRobot implements IAction {
     @Override
     public void start() {
         double deltaAngle = targetAngle - bigRobotArmData.currentAngle;
-        targetTicks = (int) (bigRobotArmData.ticksPerDeg*deltaAngle);
+        targetTicks = bigRobotArmData.getLowerArmMotor().getCurrentPosition() + (int) (bigRobotArmData.ticksPerDeg*deltaAngle);
         bigRobotArmData.getLowerArmMotor().setTargetPosition(targetTicks);
         bigRobotArmData.getLowerArmMotor().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bigRobotArmData.getLowerArmMotor().setPower(0.4);
+        bigRobotArmData.getLowerArmMotor().setPower(0.5);
     }
     @Override
     public void update() {
-        if(isFinished) return;
+        TelemetryHelper.getTelemetry().addData("From liftaction: targetAngle", targetAngle);
+        TelemetryHelper.getTelemetry().addData("From liftaction: target ticks", targetTicks);
         if((closelyEqual(bigRobotArmData.getLowerArmMotor().getCurrentPosition(), targetTicks, 10))) {
             isFinished = true;
         }

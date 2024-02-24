@@ -33,7 +33,9 @@ public class SmallRobotDriveData {
         lowerLeft.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         lowerRight.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        upperLeft.setDirection(DcMotorEx.Direction.REVERSE);
+//        upperLeft.setDirection(DcMotorEx.Direction.REVERSE);
+//        lowerLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         lowerLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+        lowerRight.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 }

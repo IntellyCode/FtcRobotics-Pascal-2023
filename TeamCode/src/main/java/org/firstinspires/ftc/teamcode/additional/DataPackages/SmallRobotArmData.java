@@ -45,8 +45,9 @@ public class SmallRobotArmData {
         rightArmUpperMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         leftArmUpperMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 
-        rightArmUpperMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftArmUpperMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        //rightArmUpperMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        //leftArmUpperMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         rightArmUpperMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
         leftArmUpperMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);

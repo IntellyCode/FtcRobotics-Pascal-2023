@@ -9,7 +9,6 @@ public class RotateAction implements IAction{
     boolean isOver;
     double angle;
     SampleMecanumDrive drive;
-    Trajectory trajectory;
     public RotateAction(SampleMecanumDrive drive, double angle) {
         this.drive = drive;
         this.angle = angle;
@@ -17,8 +16,6 @@ public class RotateAction implements IAction{
     @Override
     public void start() {
         drive.turnAsync(angle);
-        drive.followTrajectory(trajectory);
-
     }
 
     @Override
