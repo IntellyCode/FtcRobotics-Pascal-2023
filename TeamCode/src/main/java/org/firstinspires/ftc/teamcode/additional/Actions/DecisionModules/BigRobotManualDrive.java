@@ -27,6 +27,10 @@ public class BigRobotManualDrive implements IDecisionModule {
     public void controlLoop() {
         //Data reading
 
+        x = gamepad1.left_stick_x;
+        y = gamepad1.left_stick_y;
+        turn = gamepad1.right_stick_x;
+/*
         x += gamepad1.left_stick_x*0.25;
         y += gamepad1.left_stick_y*0.25;
         turn += gamepad1.right_stick_x*0.25;
@@ -34,6 +38,8 @@ public class BigRobotManualDrive implements IDecisionModule {
         y = outOfRange(y);
         turn = outOfRange(turn);
 
+
+         */
         TelemetryHelper.getTelemetry().addData("x", x);
         TelemetryHelper.getTelemetry().addData("y", y);
         TelemetryHelper.getTelemetry().addData("turn", turn);
