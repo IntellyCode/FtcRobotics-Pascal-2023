@@ -11,27 +11,17 @@ import org.firstinspires.ftc.teamcode.Common.Vector3d;
 
 @Config
 public class SmallRobotArmData {
-    //Pid coefficients
-    public static Vector3d pidCoefficients = new Vector3d(1f , 0.2f, 0.1f);
-    public Vector3d getPIDCoefficients() {
-        return pidCoefficients;
-    }
-
     //Upper section
     DcMotorEx rightArmUpperMotor;
-    DcMotorEx leftArmUpperMotor;
-    public final int upperMotorTicksPerRev = 288;
-    public final double upperMotorGearRation = 1.0f/4.5f;
-    public Vector2d upperJointCoordinates; //Relative to the robot centre and the ground
-    public double upperJointAngle; //To the vertical
-
     public DcMotorEx getRightArmMotor() {
         return rightArmUpperMotor;
     }
-
+    DcMotorEx leftArmUpperMotor;
     public DcMotorEx getLeftArmMotor() {
         return leftArmUpperMotor;
     }
+    public final int upperMotorTicksPerRev = 288;
+    public final double upperMotorGearRatio = 1.0f/4.5f;
 
     //Lower section
     Servo lowerServo;
@@ -41,8 +31,6 @@ public class SmallRobotArmData {
     Servo grabberServoRight;
     public final int grabberServoTicksPerRev = 000;
     public final float grabberServoGearRatio = 000f;
-    Vector2d grabberCoordinates; //Relative to the robot centre and the ground
-    double grabberAngle; //To the horizontal
 
     public SmallRobotArmData(HardwareMap map) {
         rightArmUpperMotor = map.get(DcMotorEx.class, "rightArmMotor");

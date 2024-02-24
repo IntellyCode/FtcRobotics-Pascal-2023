@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.additional.Actions;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.additional.DataPackages.BeltData;
+import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotBeltData;
 
 public class PickupPixel implements IAction {
     ElapsedTime elapsedtime;
@@ -11,16 +11,16 @@ public class PickupPixel implements IAction {
     boolean isOver;
     final double pixelPickupConstant = 1000; //In milliseconds
 
-    public PickupPixel(BeltData beltData) {
-        this.beltData = beltData;
+    public PickupPixel(BigRobotBeltData bigRobotBeltData) {
+        this.bigRobotBeltData = bigRobotBeltData;
     }
-    BeltData beltData;
+    BigRobotBeltData bigRobotBeltData;
     @Override
     public void start() {
         if(isOver()) return;
         isStarted = true;
-        beltData.getBeltMotor1().setPower(1);
-        beltData.getBeltMotor2().setPower(1);
+        bigRobotBeltData.getBeltMotor1().setPower(1);
+        bigRobotBeltData.getBeltMotor2().setPower(1);
         elapsedtime = new ElapsedTime();
     }
 
@@ -28,8 +28,8 @@ public class PickupPixel implements IAction {
     public void update() {
         if(isOver) return;
         if(elapsedtime.milliseconds() >= pixelPickupConstant) {
-            beltData.getBeltMotor1().setPower(0);
-            beltData.getBeltMotor2().setPower(0);
+            bigRobotBeltData.getBeltMotor1().setPower(0);
+            bigRobotBeltData.getBeltMotor2().setPower(0);
             isOver = true;
         }
     }

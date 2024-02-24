@@ -5,13 +5,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.additional.DataPackages.SmallRobotArmData;
 
-public class ManualArmModule implements IDecisionModule {
+public class SmallRobotManualArmModule implements IDecisionModule {
     Gamepad gamepad1;
     SmallRobotArmData smallRobotArmData;
 
     double armY;
     double cleshnjaY;
-    public ManualArmModule(HardwareMap map, Gamepad gamepad1) {
+    public SmallRobotManualArmModule(HardwareMap map, Gamepad gamepad1) {
         smallRobotArmData = new SmallRobotArmData(map);
         this.gamepad1 = gamepad1;
     }

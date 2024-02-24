@@ -1,12 +1,14 @@
 package org.firstinspires.ftc.teamcode.Common;
 
+import org.firstinspires.ftc.teamcode.additional.Actions.IAction;
+
 import java.util.List;
 
 /*
 This implementation of IAction allows to combine multiple actions happening at the same time
 When every action finished - so does the ComplexAction.
 */
-public class ComplexAction implements IAction{
+public class ComplexAction implements IAction {
     List<IAction> ongoingActions;
     public List<IAction> getOngoingActions() {
         return ongoingActions;

@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.additional.Actions;
 
-import org.firstinspires.ftc.teamcode.additional.DataPackages.PlaneLauncherData;
+import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotPlaneLauncherData;
 
 public class ThrowAction implements IAction {
     boolean isFinished;
-    PlaneLauncherData data;
+    BigRobotPlaneLauncherData data;
     @Override
     public void start() {
         //This releases a spring or whatever. Don't know how it will work exactly yet

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.additional.Actions;
 
 import java.util.List;
 
-public class ComplexAction implements IAction{
+public class SimultaneousAction implements IAction{
     List<IAction> ongoingActions;
     public List<IAction> getOngoingActions() {
         return ongoingActions;
@@ -13,7 +13,7 @@ public class ComplexAction implements IAction{
         return finishedActions;
     }
 
-    public ComplexAction(List<IAction> actions) {
+    public SimultaneousAction(List<IAction> actions) {
         ongoingActions = actions;
     }
     boolean isFinished;

@@ -3,26 +3,27 @@ package org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.additional.DataPackages.DriveData;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotDriveData;
 
-public class ManualDriveModule implements IDecisionModule {
-    DriveData driveData;
+public class BigRobotManualDrive implements IDecisionModule {
+    BigRobotDriveData bigRobotDriveData;
     Gamepad gamepad1;
 
     double x;
     double y;
     double turn;
 
-    public ManualDriveModule(HardwareMap map, Gamepad gamepad1) {
-        driveData = new DriveData(map);
+    public BigRobotManualDrive(HardwareMap map, Gamepad gamepad1) {
+        bigRobotDriveData = new BigRobotDriveData(map);
         this.gamepad1 = gamepad1;
     }
     @Override
     public void controlLoop() {
         //Data reading
-        x = -gamepad1.left_stick_x;
-        y = -gamepad1.left_stick_y;
+        x = gamepad1.left_stick_x;
+        y = gamepad1.left_stick_y;
         turn = gamepad1.right_stick_x;
 
         TelemetryHelper.getTelemetry().addData("x", x);
@@ -40,10 +41,15 @@ public class ManualDriveModule implements IDecisionModule {
         TelemetryHelper.getTelemetry().addData("lrPower", lrPower);
 
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(turn), 1);
-        driveData.upperLeft.setPower(ulPower / denominator);
-        driveData.lowerLeft.setPower(llPower / denominator);
-        driveData.upperRight.setPower(urPower / denominator);
-        driveData.lowerRight.setPower(lrPower / denominator);
+        TelemetryHelper.getTelemetry().addData("fp", ulPower / denominator);
+        bigRobotDriveData.getUpperLeft().setPower(ulPower / denominator);
+        bigRobotDriveData.getLowerLeft().setPower(llPower / denominator);
+        bigRobotDriveData.getUpperRight().setPower(urPower / denominator);
+        bigRobotDriveData.getLowerRight().setPower(lrPower / denominator);
+        TelemetryHelper.getTelemetry().addData("Enabled:", bigRobotDriveData.getLowerLeft().isMotorEnabled());
+
+        //Haptic feedback
+        if(bigRobotDriveData.distanceSensor.getDistance(DistanceUnit.CM) < 30)
+            gamepad1.rumble(100);
     }
 }
-
