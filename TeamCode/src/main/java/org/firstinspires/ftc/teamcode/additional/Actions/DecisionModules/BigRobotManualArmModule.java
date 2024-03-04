@@ -28,6 +28,22 @@ public class BigRobotManualArmModule implements IDecisionModule {
         TelemetryHelper.getTelemetry().addData("L Servo pos", bigRobotArmData.getClawServoLeft().getPosition());
         //Haptic feedback
 
+        //Upper arm control
+        double upperPower = 0f;
+        if (gamepad1.dpad_up) {
+            upperPower = 1f;
+        } else if (gamepad1.dpad_down) upperPower = -1f;
+
+        upperPower = limitExceeded(bigRobotArmData.getUpperArmMotor(), bigRobotArmData.lowerMotorTicksLowerBound, bigRobotArmData.upperMotorTicksUpperBound, upperPower);
+        bigRobotArmData.getUpperArmMotor().setPower(upperPower);
+        TelemetryHelper.getTelemetry().addData("Upper m ticks:", bigRobotArmData.getUpperArmMotor().getCurrentPosition());
+
+        /*if (gamepad1.dpad_down ){
+            targetAngle = adjustAngle(bigRobotArmData.getUpperArmMotor(),targetAngle);
+        }
+
+         */
+
         //Lower motor control
         targetAngle += (gamepad1.right_trigger - gamepad1.left_trigger) * 3;
         if (targetAngle > 45)
@@ -43,26 +59,6 @@ public class BigRobotManualArmModule implements IDecisionModule {
         TelemetryHelper.getTelemetry().addData("rightTrigger", gamepad1.right_trigger);
         TelemetryHelper.getTelemetry().addData("leftTrigger", gamepad1.left_trigger);
 
-        //Upper arm control
-        double upperPower = 0f;
-        if (gamepad1.dpad_up) {
-            upperPower = 1f;
-        } else if (gamepad1.dpad_down) upperPower = -1f;
-
-        if ((bigRobotArmData.getUpperArmMotor().getCurrentPosition() > bigRobotArmData.upperMotorTicksUpperBound) && upperPower > 0){
-            upperPower = 0;
-            bigRobotArmData.getUpperArmMotor().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        }
-        else if((bigRobotArmData.getUpperArmMotor().getCurrentPosition() < bigRobotArmData.lowerMotorTicksLowerBound) && upperPower < 0 ) {
-            bigRobotArmData.getUpperArmMotor().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            upperPower = 0;
-        }
-        bigRobotArmData.getUpperArmMotor().setPower(upperPower);
-        TelemetryHelper.getTelemetry().addData("Upper m ticks:", bigRobotArmData.getUpperArmMotor().getCurrentPosition());
-
-        if(gamepad1.options) {
-
-        }
         //Cleshnja control
         if(gamepad1.square) cleshnjaClosed = false;
         if(gamepad1.circle) cleshnjaClosed = true;
@@ -100,6 +96,24 @@ public class BigRobotManualArmModule implements IDecisionModule {
             TelemetryHelper.getTelemetry().addData("Returned Power: ", minP + (maxP - minP) * percentage);
             return minP + (maxP - minP) * percentage;
         }
+    }
+
+    private double limitExceeded(DcMotorEx motor, int min, int max, double dir) {
+        int currentPosition = motor.getCurrentPosition();
+        if ((dir > 0 && currentPosition > max) || (dir < 0 && currentPosition < min)) {
+            return 0;
+        }
+        return 0;
+    }
+
+    private double adjustAngle(DcMotorEx motor,double angle){
+        if (motor.getCurrentPosition() < bigRobotArmData.minTickForRaise){
+            return 20;
+        }
+        if (motor.getCurrentPosition() < bigRobotArmData.lowerMotorTicksLowerBound){
+            return 0;
+        }
+        return angle;
     }
 }
 

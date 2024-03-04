@@ -13,6 +13,9 @@ import org.firstinspires.ftc.teamcode.Common.Vector3d;
 @Config
 public class BigRobotArmData {
     //Constants for raising the arm (power)
+
+    //Ticks to slightly raise the hand when retracting.
+    public final int minTickForRaise = 600;
     public final double maxPower = 0.7;
     public final double minPower = 0.1;
     //Grabber coordinates with respect to the front side of the robot and the ground
