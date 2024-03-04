@@ -51,8 +51,8 @@ public class BigRobotManualArmModule implements IDecisionModule {
 
         if ((bigRobotArmData.getUpperArmMotor().getCurrentPosition() > bigRobotArmData.upperMotorTicksUpperBound) && upperPower > 0){
             upperPower = 0;
-        bigRobotArmData.getUpperArmMotor().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    }
+            bigRobotArmData.getUpperArmMotor().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
         else if((bigRobotArmData.getUpperArmMotor().getCurrentPosition() < bigRobotArmData.lowerMotorTicksLowerBound) && upperPower < 0 ) {
             bigRobotArmData.getUpperArmMotor().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             upperPower = 0;
