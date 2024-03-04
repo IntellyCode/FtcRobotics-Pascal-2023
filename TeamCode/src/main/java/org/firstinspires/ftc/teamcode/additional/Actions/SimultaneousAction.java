@@ -1,5 +1,10 @@
 package org.firstinspires.ftc.teamcode.additional.Actions;
 
+import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class SimultaneousAction implements IAction{
@@ -13,10 +18,14 @@ public class SimultaneousAction implements IAction{
         return finishedActions;
     }
 
-    public SimultaneousAction(List<IAction> actions) {
-        ongoingActions = actions;
+    public SimultaneousAction(IAction ... actions) {
+        ongoingActions = new LinkedList<>();
+        for(IAction action : actions)
+            ongoingActions.add(action);
+        finishedActions = new ArrayList<>();
+
     }
-    boolean isFinished;
+    boolean isFinished = false;
     public boolean isOver() {
         return isFinished;
     }
@@ -33,16 +42,20 @@ public class SimultaneousAction implements IAction{
     public void update() {
         if(isFinished) return;
 
-        for (IAction action : ongoingActions) {
-            if(action.isOver()) {
-                finishedActions.add(action);
-                ongoingActions.remove(action);
+        for (int i = 0; i < ongoingActions.size(); ++i) {
+            if(ongoingActions.get(i).isOver()) {
+                finishedActions.add(ongoingActions.get(i));
+                ongoingActions.remove(i);
             }
-            else
-                action.update();
+            else {
+                TelemetryHelper.getTelemetry().addData("Curr size", ongoingActions.size());
+                ongoingActions.get(i).update();
+            }
         }
 
         if(ongoingActions.size() == 0)
             isFinished = true;
+        TelemetryHelper.getTelemetry().addData("Finished :", isFinished);
+        TelemetryHelper.getTelemetry().addData("Ongoing actions:", ongoingActions.size());
     }
 }

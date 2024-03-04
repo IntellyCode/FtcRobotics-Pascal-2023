@@ -42,7 +42,7 @@ public class BigRobotArmData {
     }
     public final int upperMotorTicksUpperBound = 6000;
     public final int upperMotorTicksLowerBound = 0;
-    public final double ticksPerCm = -94.492;
+    public final double ticksPerCm = 94.492;
 
 
 

@@ -26,6 +26,10 @@ public class LiftToAngleBigRobot implements IAction {
 
     @Override
     public void start() {
+        if(targetAngle > 45)
+            targetAngle = 45;
+        else if(targetAngle < 0)
+            targetAngle = 0;
         double deltaAngle = targetAngle - bigRobotArmData.currentAngle;
         targetTicks = bigRobotArmData.getLowerArmMotor().getCurrentPosition() + (int) (bigRobotArmData.ticksPerDeg*deltaAngle);
         bigRobotArmData.getLowerArmMotor().setTargetPosition(targetTicks);
