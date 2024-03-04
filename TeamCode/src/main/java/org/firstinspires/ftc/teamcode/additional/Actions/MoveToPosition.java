@@ -20,13 +20,14 @@ public class MoveToPosition implements IAction {
         trajectory = drive.trajectoryBuilder(new Pose2d())
                 .splineTo(pos.vec(), pos.getHeading()).
                 build();
-        drive.followTrajectory(trajectory);
+        drive.followTrajectoryAsync(trajectory);
 
     }
 
     @Override
     public void update() {
         if(!drive.isBusy()) isOver = true;
+        drive.update();
     }
 
     @Override
