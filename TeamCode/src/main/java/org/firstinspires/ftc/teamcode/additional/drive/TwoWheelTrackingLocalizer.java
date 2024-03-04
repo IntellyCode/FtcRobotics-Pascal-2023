@@ -34,8 +34,8 @@ import java.util.List;
  *
  */
 public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
-    public static double X_MULTIPLIER = 1; // Multiplier in the X direction
-    public static double Y_MULTIPLIER = 1; // Multiplier in the Y direction
+    public static double X_MULTIPLIER = 1.0176; // Multiplier in the X direction
+    public static double Y_MULTIPLIER = 1.00197; // Multiplier in the Y direction
     public static double TICKS_PER_REV = 8192;
     public static double WHEEL_RADIUS = (2.5);; //cm
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (encoder) speed
@@ -61,9 +61,9 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
 
         this.drive = drive;
         parallelEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "upperRight/parallelEncoder"));
-        //parallelEncoder.setDirection(Encoder.Direction.REVERSE);
         perpendicularEncoder = new Encoder(hardwareMap.get(DcMotorEx.class, "upperLeft/perpendicularEncoder"));
-
+        parallelEncoder.setDirection(Encoder.Direction.REVERSE);
+        perpendicularEncoder.setDirection(Encoder.Direction.REVERSE);
         // TODO: reverse any encoders using Encoder.setDirection(Encoder.Direction.REVERSE)
     }
 
@@ -89,6 +89,8 @@ public class TwoWheelTrackingLocalizer extends TwoTrackingWheelLocalizer {
                 encoderTicksToInches(perpendicularEncoder.getCurrentPosition() * Y_MULTIPLIER)
         );
     }
+    //(1.029 + 1.014 + 1.010)/3 = 1.0176 (in x)
+    //(1.008 + 0.9942 + 1.0037)/3 = 1.00197 (in y)
 
     @NonNull
     @Override

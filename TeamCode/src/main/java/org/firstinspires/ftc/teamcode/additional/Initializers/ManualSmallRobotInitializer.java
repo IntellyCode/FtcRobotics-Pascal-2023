@@ -15,13 +15,13 @@ public class ManualSmallRobotInitializer extends OpMode {
     public void init() {
         TelemetryHelper.initTelemetry(telemetry);
         driveController = new SmallRobotManualDriveModule(hardwareMap, gamepad1);
-        //armController = new SmallRobotManualArmModule(hardwareMap, gamepad1);
+        armController = new SmallRobotManualArmModule(hardwareMap, gamepad1);
     }
 
     @Override
     public void loop() {
         TelemetryHelper.update();
         driveController.controlLoop();
-        //armController.controlLoop();
+        armController.controlLoop();
     }
 }

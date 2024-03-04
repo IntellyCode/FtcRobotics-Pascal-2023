@@ -4,7 +4,6 @@ import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-//Тут все константы которые использует Roadrunner. Я пока не пробовал выносить всё в свой отдельный класс чтобы не ничегоы сломать
 @Config
 public class DriveConstants {
     /*
@@ -35,7 +34,7 @@ public class DriveConstants {
      */
     public static double WHEEL_RADIUS = 5; // cm
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 30.86f; // cm
+    public static double TRACK_WIDTH = 34.315f; // cm
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -43,9 +42,9 @@ public class DriveConstants {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
-    public static double kV = 0.015f;
-    public static double kA = 0.0015f;
-    public static double kStatic = 0.005f;
+    public static double kV = 0.0133f;
+    public static double kA = 0.0025f;
+    public static double kStatic = 0.015f;
 
     /*
      * These values are used to generate the trajectories for you robot. To ensure proper operation,
@@ -54,9 +53,9 @@ public class DriveConstants {
      * small and gradually increase them later after everything is working. All distance units are
      * inches.
      */
-    public static double MAX_VEL = 70; //cm/s
-    public static double MAX_ACCEL = 70; //cm/s
-    public static double MAX_ANG_VEL = Math.toRadians(95.625);
+    public static double MAX_VEL = 60f; //cm/s
+    public static double MAX_ACCEL = 60f; //cm/s
+    public static double MAX_ANG_VEL = Math.toRadians(106);
     public static double MAX_ANG_ACCEL = Math.toRadians(95.625);
 
     /*

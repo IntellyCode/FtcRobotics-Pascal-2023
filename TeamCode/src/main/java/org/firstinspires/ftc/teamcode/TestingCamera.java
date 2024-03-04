@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.OpModes.Testing;
+package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Components.Sensors.Camera;
+import org.firstinspires.ftc.teamcode.Camera.Camera;
 import org.firstinspires.ftc.teamcode.Common.Team;
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 
