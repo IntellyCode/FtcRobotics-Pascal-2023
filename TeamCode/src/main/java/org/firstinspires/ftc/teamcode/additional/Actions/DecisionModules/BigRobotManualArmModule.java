@@ -33,7 +33,7 @@ public class BigRobotManualArmModule implements IDecisionModule {
         if(targetAngle < 0)
             targetAngle = 0;
 
-        liftAction = new LiftToAngleBigRobot(bigRobotArmData, targetAngle);
+        liftAction = new LiftToAngleBigRobot(bigRobotArmData, targetAngle,0.2);
         liftAction.start();
         TelemetryHelper.getTelemetry().addData("Target angle", targetAngle);
         TelemetryHelper.getTelemetry().addData("current angle", bigRobotArmData.currentAngle);

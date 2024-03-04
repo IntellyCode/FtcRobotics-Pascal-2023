@@ -11,9 +11,17 @@ public class LiftToAngleBigRobot implements IAction {
     boolean isFinished;
     double targetAngle;
     int targetTicks;
+    double power;
     public LiftToAngleBigRobot(BigRobotArmData bigRobotArmData, double targetAngle) {
         this.bigRobotArmData = bigRobotArmData;
         this.targetAngle = targetAngle;
+        this.power = 0.5;
+    }
+
+    public LiftToAngleBigRobot(BigRobotArmData bigRobotArmData, double targetAngle,double power) {
+        this.bigRobotArmData = bigRobotArmData;
+        this.targetAngle = targetAngle;
+        this.power = power;
     }
 
     @Override
@@ -22,7 +30,7 @@ public class LiftToAngleBigRobot implements IAction {
         targetTicks = bigRobotArmData.getLowerArmMotor().getCurrentPosition() + (int) (bigRobotArmData.ticksPerDeg*deltaAngle);
         bigRobotArmData.getLowerArmMotor().setTargetPosition(targetTicks);
         bigRobotArmData.getLowerArmMotor().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bigRobotArmData.getLowerArmMotor().setPower(0.5);
+        bigRobotArmData.getLowerArmMotor().setPower(power);
     }
     @Override
     public void update() {
