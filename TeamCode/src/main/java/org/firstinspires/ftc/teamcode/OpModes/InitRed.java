@@ -19,8 +19,9 @@ import org.firstinspires.ftc.teamcode.additional.drive.SampleMecanumDrive;
 public class InitRed extends OpMode {
 
     Camera camera;
-    RelativePosition rlp;
     Team team = Team.red;
+
+    RelativePosition rlp;
     IAction action;
     SampleMecanumDrive drive;
     @Override
