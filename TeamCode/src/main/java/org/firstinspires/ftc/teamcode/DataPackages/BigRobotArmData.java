@@ -94,7 +94,7 @@ public class BigRobotArmData {
     }
 
     public void localize() {
-        armLength = armLength +( getUpperArmMotor().getCurrentPosition()/ticksPerCm);
+        armLength = initialArmLength + (getUpperArmMotor().getCurrentPosition()/ticksPerCm);
         currentAngle = getLowerArmMotor().getCurrentPosition()/ticksPerDeg;
         double x = armLength*Math.cos(Math.toRadians(currentAngle));
         double y = armLength*Math.sin(Math.toRadians(currentAngle));

@@ -35,6 +35,7 @@ public class SequencedAction implements IAction {
             TelemetryHelper.getTelemetry().addData("Current action: ", currentAction);
             TelemetryHelper.getTelemetry().addData("Current action status: ", currentAction);
         }
+
     }
 
     @Override

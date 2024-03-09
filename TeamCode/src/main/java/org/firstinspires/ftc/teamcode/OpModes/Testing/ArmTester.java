@@ -36,7 +36,7 @@ public class ArmTester extends OpMode {
 //            currAction.start();
 //        }
         else if(gamepad1.circle) {
-            currAction = new ExtendTheArmAction(data, 42);
+            currAction = new ExtendTheArmAction(data, 46);
             currAction.start();
         }
         else if(gamepad1.triangle) {
@@ -44,7 +44,7 @@ public class ArmTester extends OpMode {
             currAction.start();
         }
         else if(gamepad1.square) {
-            currAction = new ThrowPlaneAction(data);
+            currAction = new LiftToAngleBigRobot(data, 0);
             currAction.start();
         }
 
@@ -59,7 +59,6 @@ public class ArmTester extends OpMode {
         TelemetryHelper.getTelemetry().addData("Current angle", data.currentAngle);
         TelemetryHelper.getTelemetry().addData("Current arm length", data.armLength);
         TelemetryHelper.getTelemetry().addData("Grabber coordinates", data.getGrabberCoordinates().getX());
-        TelemetryHelper.getTelemetry().addData("Current arm length", data.getGrabberCoordinates().getY());
         data.localize();
     }
 }

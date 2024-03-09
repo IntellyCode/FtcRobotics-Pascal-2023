@@ -39,7 +39,9 @@ public class LiftToAngleBigRobot implements IAction {
     public void update() {
         TelemetryHelper.getTelemetry().addData("From liftaction: targetAngle", targetAngle);
         TelemetryHelper.getTelemetry().addData("From liftaction: target ticks", targetTicks);
-        if((closelyEqual(bigRobotArmData.getLowerArmMotor().getCurrentPosition(), targetTicks, 10))) {
+        TelemetryHelper.getTelemetry().addData("Current angle", bigRobotArmData.currentAngle);
+        TelemetryHelper.getTelemetry().addData("Current ticks", bigRobotArmData.getLowerArmMotor().getCurrentPosition());
+        if((closelyEqual(bigRobotArmData.getLowerArmMotor().getCurrentPosition(), targetTicks, 20))) {
             isFinished = true;
         }
     }

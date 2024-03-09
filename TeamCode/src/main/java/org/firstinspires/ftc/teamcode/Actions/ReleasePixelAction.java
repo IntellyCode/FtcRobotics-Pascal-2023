@@ -29,13 +29,12 @@ public class ReleasePixelAction implements IAction {
             leftTarget = 0;
             armData.getClawServoLeft().setPosition(leftTarget);
         }
+        isFinished = true;
     }
 
     @Override
     public void update() {
         if(!isFinished) return;
-        if((armData.getClawServoLeft().getPosition() == leftTarget) && (armData.getClawServoRight().getPosition() == rightTarget))
-            isFinished = true;
     }
 
     @Override

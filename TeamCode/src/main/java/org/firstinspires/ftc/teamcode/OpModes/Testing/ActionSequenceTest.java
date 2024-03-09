@@ -35,7 +35,7 @@ public class ActionSequenceTest extends OpMode {
                 new LiftToAngleBigRobot(armData, 30),
                 new ExtendTheArmAction(armData, 70)
         );
-        rotate = new RotateAction(drive, 90);
+        rotate = new RotateAction(drive, Math.toRadians(90));
 //        parallelActionSequence = new SimultaneousAction(
 //                new MoveToPositionDiagonal(drive, new Pose2d(100, 0)),
 //                new LiftToAngleBigRobot(armData, 30),
@@ -58,9 +58,9 @@ public class ActionSequenceTest extends OpMode {
             scanAndMoveAction.start();
         }
         if(gamepad1.square) {
-            moveLine = new MoveToPositionLine(drive, drive.getPoseEstimate() ,new Pose2d(100, 100));
-            moveLine.start();
+            rotate.start();
         }
+        rotate.update();
         if(sequstarted)
             sequentialActionSequence.update();
         if(simlutstarted)

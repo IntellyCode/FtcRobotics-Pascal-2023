@@ -4,21 +4,22 @@ import org.firstinspires.ftc.teamcode.Roadrunner.drive.SampleMecanumDrive;
 
 public class RotateAction implements IAction{
     boolean isOver;
-    double angle;
+    double angleRad;
     SampleMecanumDrive drive;
-    public RotateAction(SampleMecanumDrive drive, double angle) {
+    public RotateAction(SampleMecanumDrive drive, double angleRad) {
         this.drive = drive;
-        this.angle = angle;
+        this.angleRad = angleRad;
     }
     @Override
     public void start() {
-        drive.turnAsync(angle);
+        drive.turnAsync(angleRad);
+
     }
 
     @Override
     public void update() {
         if(!drive.isBusy()) isOver = true;
-
+        drive.update();
     }
 
     @Override
