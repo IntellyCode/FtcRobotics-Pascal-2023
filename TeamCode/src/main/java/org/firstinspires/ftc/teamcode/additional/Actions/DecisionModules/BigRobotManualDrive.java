@@ -111,11 +111,6 @@ public class BigRobotManualDrive implements IDecisionModule {
     }
     @Override
     public void controlLoop() {
-        //Data reading
-
-//        x = gamepad1.left_stick_x;
-//        y = -gamepad1.left_stick_y;
-//        turn = gamepad1.right_stick_x;
 
         x += gamepad.left_stick_x*0.1;
         y -= gamepad.left_stick_y*0.1;

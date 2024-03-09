@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -10,16 +9,18 @@ import org.firstinspires.ftc.teamcode.additional.Actions.LiftToAngleBigRobot;
 import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotArmData;
 
 public class BigRobotManualArmModule implements IDecisionModule {
+
+    final int setAngle = 15;
     LiftToAngleBigRobot liftAction;
     double targetAngle;
     boolean cleshnjaClosed;
-    Gamepad gamepad1;
+    Gamepad gamepad;
     BigRobotArmData bigRobotArmData;
 
-    public BigRobotManualArmModule(HardwareMap map, Gamepad gamepad1) {
+    public BigRobotManualArmModule(HardwareMap map, Gamepad gamepad) {
         bigRobotArmData = new BigRobotArmData(map);
         bigRobotArmData.getSweeperServo().setPosition(0);
-        this.gamepad1 = gamepad1;
+        this.gamepad = gamepad;
     }
 
     @Override
@@ -30,22 +31,21 @@ public class BigRobotManualArmModule implements IDecisionModule {
 
         //Upper arm control
         double upperPower = 0f;
-        if (gamepad1.dpad_up) {
+        if (gamepad.dpad_up && spaceAheadFree(bigRobotArmData.getUpperArmMotor(),targetAngle)) {
             upperPower = 1f;
-        } else if (gamepad1.dpad_down) upperPower = -1f;
+        }else if (gamepad.dpad_up && !spaceAheadFree(bigRobotArmData.getUpperArmMotor(),targetAngle)){
+            targetAngle = setAngle;
+        } else if (gamepad.dpad_down) upperPower = -1f;
 
         upperPower = limitExceeded(bigRobotArmData.getUpperArmMotor(), bigRobotArmData.lowerMotorTicksLowerBound, bigRobotArmData.upperMotorTicksUpperBound, upperPower);
         bigRobotArmData.getUpperArmMotor().setPower(upperPower);
         TelemetryHelper.getTelemetry().addData("Upper m ticks:", bigRobotArmData.getUpperArmMotor().getCurrentPosition());
 
-        /*if (gamepad1.dpad_down ){
-            targetAngle = adjustAngle(bigRobotArmData.getUpperArmMotor(),targetAngle);
+        if (gamepad.dpad_down || gamepad.dpad_up ){
+            targetAngle = adjustAngle(bigRobotArmData.getUpperArmMotor(),targetAngle, gamepad.dpad_down);
         }
-
-         */
-
         //Lower motor control
-        targetAngle += (gamepad1.right_trigger - gamepad1.left_trigger) * 3;
+        targetAngle += (gamepad.right_trigger - gamepad.left_trigger) * 3;
         if (targetAngle > 45)
             targetAngle = 45;
         if (targetAngle < 0)
@@ -56,12 +56,12 @@ public class BigRobotManualArmModule implements IDecisionModule {
         liftAction.start();
         TelemetryHelper.getTelemetry().addData("Target angle", targetAngle);
         TelemetryHelper.getTelemetry().addData("current angle", bigRobotArmData.currentAngle);
-        TelemetryHelper.getTelemetry().addData("rightTrigger", gamepad1.right_trigger);
-        TelemetryHelper.getTelemetry().addData("leftTrigger", gamepad1.left_trigger);
+        TelemetryHelper.getTelemetry().addData("rightTrigger", gamepad.right_trigger);
+        TelemetryHelper.getTelemetry().addData("leftTrigger", gamepad.left_trigger);
 
         //Cleshnja control
-        if(gamepad1.square) cleshnjaClosed = false;
-        if(gamepad1.circle) cleshnjaClosed = true;
+        if(gamepad.square) cleshnjaClosed = false;
+        if(gamepad.circle) cleshnjaClosed = true;
 
         if(cleshnjaClosed) {
             bigRobotArmData.getClawServoLeft().setPosition(1);
@@ -103,17 +103,24 @@ public class BigRobotManualArmModule implements IDecisionModule {
         if ((dir > 0 && currentPosition > max) || (dir < 0 && currentPosition < min)) {
             return 0;
         }
-        return 0;
+        return dir;
     }
 
-    private double adjustAngle(DcMotorEx motor,double angle){
-        if (motor.getCurrentPosition() < bigRobotArmData.minTickForRaise){
-            return 20;
+    private double adjustAngle(DcMotorEx motor,double angle, boolean special){
+
+        if (motor.getCurrentPosition() < bigRobotArmData.minTickForRaise && motor.getCurrentPosition() > bigRobotArmData.lowerMotorTicksLowerBound){
+            if (angle < setAngle){
+                return setAngle;
+            }
         }
-        if (motor.getCurrentPosition() < bigRobotArmData.lowerMotorTicksLowerBound){
+        if (motor.getCurrentPosition() <= bigRobotArmData.lowerMotorTicksLowerBound &&special){
             return 0;
         }
         return angle;
+    }
+
+    private boolean spaceAheadFree(DcMotorEx motor, double currentAngle){
+        return motor.getCurrentPosition() >= bigRobotArmData.minTickForRaise  || !(currentAngle < setAngle);
     }
 }
 
