@@ -70,7 +70,7 @@ public class AutonomousRoutine {
             double angleRot = getAngle(rlp);
             TelemetryHelper.getDashboardTelemetry().put("Angle", angleRot);
             finalSequence = new SequencedAction(
-                    (IAction) new OpenSweeper(armData,false),
+                    new OpenSweeper(armData,false),
                     new SwitchBeltAction(beltData,true),
                     new SimultaneousAction(
                             new WaitAction(100),
