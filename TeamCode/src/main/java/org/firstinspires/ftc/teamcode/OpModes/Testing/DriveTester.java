@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 import org.firstinspires.ftc.teamcode.additional.Actions.IAction;
-import org.firstinspires.ftc.teamcode.additional.Actions.MoveToPosition;
+import org.firstinspires.ftc.teamcode.additional.Actions.MoveToPositionSpline;
 import org.firstinspires.ftc.teamcode.additional.Actions.RotateAction;
 import org.firstinspires.ftc.teamcode.additional.drive.SampleMecanumDrive;
 
@@ -24,7 +24,7 @@ public class DriveTester extends OpMode {
     @Override
     public void loop() {
         if(gamepad1.cross) {
-            action = new MoveToPosition(drive, new Pose2d(300, 0, 0));
+            action = new MoveToPositionSpline(drive, drive.getPoseEstimate(), new Pose2d(300, 0, 0));
             action.start();
         }
         if(gamepad1.circle) {

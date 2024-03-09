@@ -98,16 +98,16 @@ public class BigRobotManualDrive implements IDecisionModule {
     BigRobotDriveData bigRobotDriveData;
 
     BigRobotSensorData bigRobotSensorData;
-    Gamepad gamepad1;
+    Gamepad gamepad;
 
     double x = 0;
     double y = 0;
     double turn;
 
-    public BigRobotManualDrive(HardwareMap map, Gamepad gamepad1) {
+    public BigRobotManualDrive(HardwareMap map, Gamepad gamepad) {
         bigRobotDriveData = new BigRobotDriveData(map);
         bigRobotSensorData = new BigRobotSensorData(map);
-        this.gamepad1 = gamepad1;
+        this.gamepad = gamepad;
     }
     @Override
     public void controlLoop() {
@@ -117,16 +117,16 @@ public class BigRobotManualDrive implements IDecisionModule {
 //        y = -gamepad1.left_stick_y;
 //        turn = gamepad1.right_stick_x;
 
-        x += gamepad1.left_stick_x*0.1;
-        y -= gamepad1.left_stick_y*0.1;
-        turn += gamepad1.right_stick_x*0.1;
+        x += gamepad.left_stick_x*0.1;
+        y -= gamepad.left_stick_y*0.1;
+        turn += gamepad.right_stick_x*0.1;
         x = outOfRange(x);
         y = outOfRange(y);
         turn = outOfRange(turn);
 
-        if(gamepad1.left_stick_x == 0) x = 0;
-        if(gamepad1.left_stick_y == 0) y = 0;
-        if(gamepad1.right_stick_x == 0) turn = 0;
+        if(gamepad.left_stick_x == 0) x = 0;
+        if(gamepad.left_stick_y == 0) y = 0;
+        if(gamepad.right_stick_x == 0) turn = 0;
 
         TelemetryHelper.getTelemetry().addData("x", x);
         TelemetryHelper.getTelemetry().addData("y", y);
@@ -152,7 +152,7 @@ public class BigRobotManualDrive implements IDecisionModule {
 
         //Haptic feedback
         if(bigRobotSensorData.getDistance() < 30)
-            gamepad1.rumble(100);
+            gamepad.rumble(100);
 
 
     }

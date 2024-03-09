@@ -18,8 +18,8 @@ public class ManualBigRobotInitializer extends OpMode {
     public void init() {
         TelemetryHelper.initTelemetry(telemetry);
         driveController = new BigRobotManualDrive(hardwareMap, gamepad1);
-        armController = new BigRobotManualArmModule(hardwareMap, gamepad1);
-        beltController = new BigRobotManualBeltModule(hardwareMap, gamepad1);
+        armController = new BigRobotManualArmModule(hardwareMap, gamepad2);
+        beltController = new BigRobotManualBeltModule(hardwareMap, gamepad2);
     }
 
     @Override

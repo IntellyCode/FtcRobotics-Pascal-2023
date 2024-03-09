@@ -9,22 +9,22 @@ import org.firstinspires.ftc.teamcode.additional.DataPackages.SmallRobotDriveDat
 
 public class SmallRobotManualDriveModule implements IDecisionModule {
     SmallRobotDriveData smallRobotDriveData;
-    Gamepad gamepad1;
+    Gamepad gamepad;
 
     double x;
     double y;
     double turn;
 
-    public SmallRobotManualDriveModule(HardwareMap map, Gamepad gamepad1) {
+    public SmallRobotManualDriveModule(HardwareMap map, Gamepad gamepad) {
         smallRobotDriveData = new SmallRobotDriveData(map);
-        this.gamepad1 = gamepad1;
+        this.gamepad = gamepad;
     }
     @Override
     public void controlLoop() {
         //Data reading
-        x = gamepad1.left_stick_x;
-        y = -gamepad1.left_stick_y;
-        turn = gamepad1.right_stick_x;
+        x = gamepad.left_stick_x;
+        y = -gamepad.left_stick_y;
+        turn = gamepad.right_stick_x;
 
         TelemetryHelper.getTelemetry().addData("x", x);
         TelemetryHelper.getTelemetry().addData("y", y);

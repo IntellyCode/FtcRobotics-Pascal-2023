@@ -7,36 +7,36 @@ import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 import org.firstinspires.ftc.teamcode.additional.DataPackages.SmallRobotArmData;
 
 public class SmallRobotManualArmModule implements IDecisionModule {
-    Gamepad gamepad1;
+    Gamepad gamepad;
     SmallRobotArmData smallRobotArmData;
 
     double upperArmY;
     double lowerArmY;
     double cleshnjaY;
-    public SmallRobotManualArmModule(HardwareMap map, Gamepad gamepad1) {
+    public SmallRobotManualArmModule(HardwareMap map, Gamepad gamepad) {
         smallRobotArmData = new SmallRobotArmData(map);
-        this.gamepad1 = gamepad1;
+        this.gamepad = gamepad;
     }
     @Override
     public void controlLoop() {
         //Upper arm
-        upperArmY = gamepad1.right_trigger - gamepad1.left_trigger;
+        upperArmY = gamepad.right_trigger - gamepad.left_trigger;
 
-        smallRobotArmData.getLowerServo().setPosition(0);
+        smallRobotArmData.getLowerServo().setPosition(1);
         smallRobotArmData.getGrabberServo().setPosition(0);
         smallRobotArmData.getRightArmMotor().setPower(upperArmY);
         smallRobotArmData.getLeftArmMotor().setPower(upperArmY);
 
         //Lower arm
-        if(gamepad1.dpad_up && lowerArmY < 1)
+        if(gamepad.dpad_up && lowerArmY < 1)
             lowerArmY += 0.01;
-        if(gamepad1.dpad_down && lowerArmY > 0)
+        if(gamepad.dpad_down && lowerArmY > 0)
             lowerArmY -= 0.01;
         smallRobotArmData.getLowerServo().setPosition(lowerArmY);
 
         //Cleshnja
-        if(gamepad1.left_bumper && cleshnjaY > 0) cleshnjaY -= 0.01*0.5;
-        if(gamepad1.right_bumper && cleshnjaY < 1) cleshnjaY += 0.01*0.5;
+        if(gamepad.left_bumper && cleshnjaY > 0) cleshnjaY -= 0.01*0.5;
+        if(gamepad.right_bumper && cleshnjaY < 1) cleshnjaY += 0.01*0.5;
         smallRobotArmData.getGrabberServo().setPosition(cleshnjaY);
         TelemetryHelper.getTelemetry().addData("CleshnjaY:", cleshnjaY);
         TelemetryHelper.getTelemetry().addData("Servo pos", smallRobotArmData.getGrabberServo().getPosition());

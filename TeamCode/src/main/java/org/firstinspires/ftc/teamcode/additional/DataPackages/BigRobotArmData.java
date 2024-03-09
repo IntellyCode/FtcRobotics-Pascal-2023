@@ -51,8 +51,8 @@ public class BigRobotArmData {
     public double armLength = initialArmLength;
 
     //Lower section
-    Servo clawServoRight;
-    Servo clawServoLeft;
+    Servo clawServoRight; //Open when pos = 1;
+    Servo clawServoLeft; //Open when pos = 0;
     Servo sweeperServo;
     public Servo getClawServoRight() {
         return clawServoRight;
