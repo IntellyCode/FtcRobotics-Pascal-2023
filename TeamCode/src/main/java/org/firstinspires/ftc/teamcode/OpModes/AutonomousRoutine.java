@@ -95,7 +95,6 @@ public class AutonomousRoutine {
                     ),
                     farSequence,
                     new MoveToPositionLine(drive,initPos,new Pose2d(1* FieldConstants.cmPerBlock,initPos.getY())),
-
                     new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,initPos.getY()),new Pose2d(1*FieldConstants.cmPerBlock,(1.4+initPos.getY()/FieldConstants.cmPerBlock*coordinateModifier)*FieldConstants.cmPerBlock*coordinateModifier)),
                     new RotateAction(drive,Math.toRadians(90*coordinateModifier)),
                     new LiftToAngleBigRobot(armData,30),
