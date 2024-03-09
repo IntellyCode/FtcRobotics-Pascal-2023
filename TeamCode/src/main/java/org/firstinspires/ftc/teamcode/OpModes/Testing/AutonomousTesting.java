@@ -59,7 +59,7 @@ public class AutonomousTesting extends OpMode {
     public void loop() {
         TelemetryHelper.update();
         if(gamepad1.cross)
-           pixelAction.start();
+           moveToPosition.start();
         if(!moveToPosition.isOver())
             moveToPosition.update();
         if(gamepad1.circle) {
@@ -76,6 +76,8 @@ public class AutonomousTesting extends OpMode {
         pickupThePixelAction.update();
         putThePixelAction.update();
         pixelAction.update();
+        telemetry.addData("currPosx", drive.getPoseEstimate().getX());
+        telemetry.addData("currPosy", drive.getPoseEstimate().getY());
         telemetry.addData("Current pos x:", drive.getPoseEstimate().getX());
         telemetry.addData("Current pos y:", drive.getPoseEstimate().getY());
         telemetry.addData("Right claw pos", armData.getClawServoRight().getPosition());

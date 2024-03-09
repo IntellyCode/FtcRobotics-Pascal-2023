@@ -29,8 +29,8 @@ public class MoveToPositionLine implements IAction {
     public void update() {
         if(!drive.isBusy()) isOver = true;
         drive.update();
-        TelemetryHelper.getTelemetry().addData("Target x:", targetPos.getX());
-        TelemetryHelper.getTelemetry().addData("Target y:", targetPos.getY());
+        TelemetryHelper.getDashboardTelemetry().put("Target x:", targetPos.getX());
+        TelemetryHelper.getDashboardTelemetry().put("Target y:", targetPos.getY());
     }
 
     @Override

@@ -1,11 +1,13 @@
-package org.firstinspires.ftc.teamcode.OpModes;
+package org.firstinspires.ftc.teamcode.OpModes.Routines;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.Actions.ExtendTheArmAction;
+import org.firstinspires.ftc.teamcode.Actions.IAction;
 import org.firstinspires.ftc.teamcode.Actions.LiftToAngleBigRobot;
+import org.firstinspires.ftc.teamcode.Actions.MoveToPositionLine;
 import org.firstinspires.ftc.teamcode.Actions.OpenSweeper;
 import org.firstinspires.ftc.teamcode.Actions.PickupThePixelAction;
 import org.firstinspires.ftc.teamcode.Actions.ReleasePixelAction;
@@ -15,33 +17,26 @@ import org.firstinspires.ftc.teamcode.Actions.SimultaneousAction;
 import org.firstinspires.ftc.teamcode.Actions.SwitchBeltAction;
 import org.firstinspires.ftc.teamcode.Actions.WaitAction;
 import org.firstinspires.ftc.teamcode.Camera.Camera;
-import org.firstinspires.ftc.teamcode.Camera.Util.RelativePosition;
-import org.firstinspires.ftc.teamcode.Camera.Data.Coordinates;
 import org.firstinspires.ftc.teamcode.Camera.Data.Team;
+import org.firstinspires.ftc.teamcode.Camera.Util.RelativePosition;
 import org.firstinspires.ftc.teamcode.DataPackages.BigRobotArmData;
 import org.firstinspires.ftc.teamcode.DataPackages.BigRobotBeltData;
 import org.firstinspires.ftc.teamcode.DataPackages.FieldConstants;
-import org.firstinspires.ftc.teamcode.TelemetryHelper;
-import org.firstinspires.ftc.teamcode.Actions.IAction;
-import org.firstinspires.ftc.teamcode.Actions.MoveToPositionSpline;
 import org.firstinspires.ftc.teamcode.Roadrunner.drive.SampleMecanumDrive;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 
 
-@TeleOp(name = "InitRed", group = "Testing")
-public class InitRed extends OpMode {
-
+public class RoutineRed {
     Camera camera;
-    Team team = Team.red;
+    Team team;
     RelativePosition rlp;
     SampleMecanumDrive drive;
     BigRobotArmData armData;
     BigRobotBeltData beltData;
     IAction finalSequence;
-    @Override
-    public void init(){
+
+    public void init(HardwareMap hardwareMap, Telemetry telemetry, Team team){
+        this.team = team;
         armData = new BigRobotArmData(hardwareMap);
         beltData = new BigRobotBeltData(hardwareMap);
         drive = new SampleMecanumDrive(hardwareMap);
@@ -50,17 +45,17 @@ public class InitRed extends OpMode {
         camera.start();
     }
 
-    @Override
     public void loop() {
         if (rlp==null) {
             rlp = camera.getPipeline().getRelPosOfProp();
             double angleRot = getAngle(rlp);
             TelemetryHelper.getDashboardTelemetry().put("Angle", angleRot);
-            finalSequence = new SequencedAction(
-                    new OpenSweeper(armData,true),
+           finalSequence = new SequencedAction(
+                    new OpenSweeper(armData,false),
                     new SwitchBeltAction(beltData,true),
+                    new WaitAction(200),
                     new SimultaneousAction(
-                            new WaitAction(300),
+                            new WaitAction(100),
                             new PickupThePixelAction(armData,true,false)
                     ),
                     new RotateAction(drive, Math.toRadians(angleRot)),
@@ -72,18 +67,23 @@ public class InitRed extends OpMode {
                     new ExtendTheArmAction(armData, armData.initialArmLength),
                     new LiftToAngleBigRobot(armData,0),
                     new RotateAction(drive, Math.toRadians(-angleRot)),
-                     new SimultaneousAction(
-                             new WaitAction(80),
-                             new PickupThePixelAction(armData,false,true)
-                     ),
+                    new SimultaneousAction(
+                            new WaitAction(100),
+                            new PickupThePixelAction(armData,false,true)
+                    ),
+                   new MoveToPositionLine(drive,drive.getPoseEstimate(),new Pose2d(2* FieldConstants.cmPerBlock,drive.getPoseEstimate().getY())),
+                   new MoveToPositionLine(drive,new Pose2d(2*FieldConstants.cmPerBlock,drive.getPoseEstimate().getY()),new Pose2d(2*FieldConstants.cmPerBlock,-1*FieldConstants.cmPerBlock)),
+                   new RotateAction(drive,Math.toRadians(-90)),
                     new LiftToAngleBigRobot(armData,45),
                     new ExtendTheArmAction(armData, 100),
                     new ReleasePixelAction(armData, false, true),
                     new SimultaneousAction(
-                         new ExtendTheArmAction(armData, armData.initialArmLength),
-                         new LiftToAngleBigRobot(armData,15,0.2)
+                            new ExtendTheArmAction(armData, armData.initialArmLength),
+                            new LiftToAngleBigRobot(armData,15,0.1)
                     ),
-                    new LiftToAngleBigRobot(armData,0)
+                    new LiftToAngleBigRobot(armData,0),
+                   new MoveToPositionLine(drive,new Pose2d(2*FieldConstants.cmPerBlock,-1*FieldConstants.cmPerBlock),new Pose2d(1*FieldConstants.cmPerBlock,-1*FieldConstants.cmPerBlock)),
+                   new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,-1*FieldConstants.cmPerBlock),new Pose2d(1*FieldConstants.cmPerBlock,-2*FieldConstants.cmPerBlock))
 
             );
             finalSequence.start();
@@ -91,7 +91,9 @@ public class InitRed extends OpMode {
             armData.localize();
             finalSequence.update();
         }
-         TelemetryHelper.getDashboardTelemetry().put("Position",rlp);
+        TelemetryHelper.getDashboardTelemetry().put("Position",rlp);
+        TelemetryHelper.getTelemetry().addData("x:", drive.getPoseEstimate().getX());
+        TelemetryHelper.getTelemetry().addData("y:", drive.getPoseEstimate().getY());
         TelemetryHelper.update();
     }
 

@@ -44,7 +44,7 @@ public class BigRobotArmData {
 
 
         //Coordinates
-    public final double initialArmLength = 42;
+    public final double initialArmLength = 39;
     public double armLength = initialArmLength;
 
     //Lower section

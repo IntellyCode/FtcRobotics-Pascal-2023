@@ -29,6 +29,12 @@ public class BigRobotManualArmModule implements IDecisionModule {
         TelemetryHelper.getTelemetry().addData("L Servo pos", bigRobotArmData.getClawServoLeft().getPosition());
         //Haptic feedback
 
+        if(gamepad.options) {
+            if(bigRobotArmData.getPlaneLauncher().getPosition() == 0)
+                bigRobotArmData.getPlaneLauncher().setPosition(1);
+            else if(bigRobotArmData.getPlaneLauncher().getPosition() == 1)
+                bigRobotArmData.getPlaneLauncher().setPosition(0);
+        }
         //Upper arm control
         double upperPower = 0f;
         if (gamepad.dpad_up && spaceAheadFree(bigRobotArmData.getUpperArmMotor(),targetAngle)) {
