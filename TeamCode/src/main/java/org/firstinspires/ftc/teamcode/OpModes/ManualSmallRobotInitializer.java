@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
-import org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules.SmallRobotManualArmModule;
-import org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules.SmallRobotManualDriveModule;
+import org.firstinspires.ftc.teamcode.DecisionModules.SmallRobotManualArmModule;
+import org.firstinspires.ftc.teamcode.DecisionModules.SmallRobotManualDriveModule;
 
 @TeleOp
 public class ManualSmallRobotInitializer extends OpMode {

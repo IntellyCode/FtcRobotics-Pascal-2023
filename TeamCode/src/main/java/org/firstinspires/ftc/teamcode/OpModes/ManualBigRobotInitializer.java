@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode.OpModes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules.BigRobotManualDrive;
-import org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules.BigRobotManualBeltModule;
-import org.firstinspires.ftc.teamcode.additional.Actions.DecisionModules.BigRobotManualArmModule;
+import org.firstinspires.ftc.teamcode.DecisionModules.BigRobotManualDrive;
+import org.firstinspires.ftc.teamcode.DecisionModules.BigRobotManualBeltModule;
+import org.firstinspires.ftc.teamcode.DecisionModules.BigRobotManualArmModule;
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
 
 @TeleOp

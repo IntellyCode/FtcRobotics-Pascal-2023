@@ -3,9 +3,8 @@ package org.firstinspires.ftc.teamcode.OpModes.Testing;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Common.Team;
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
-import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotSensorData;
+import org.firstinspires.ftc.teamcode.DataPackages.BigRobotSensorData;
 
 @TeleOp(name = "Distance Testing", group = "Testing")
 public class DistanceTesting extends OpMode {

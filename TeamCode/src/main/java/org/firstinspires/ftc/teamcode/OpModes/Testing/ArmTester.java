@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
-import org.firstinspires.ftc.teamcode.additional.Actions.ExtendTheArmAction;
-import org.firstinspires.ftc.teamcode.additional.Actions.IAction;
-import org.firstinspires.ftc.teamcode.additional.Actions.LiftToAngleBigRobot;
-import org.firstinspires.ftc.teamcode.additional.Actions.SequencedAction;
-import org.firstinspires.ftc.teamcode.additional.Actions.ThrowPlaneAction;
-import org.firstinspires.ftc.teamcode.additional.DataPackages.BigRobotArmData;
+import org.firstinspires.ftc.teamcode.Actions.ExtendTheArmAction;
+import org.firstinspires.ftc.teamcode.Actions.IAction;
+import org.firstinspires.ftc.teamcode.Actions.LiftToAngleBigRobot;
+import org.firstinspires.ftc.teamcode.Actions.SequencedAction;
+import org.firstinspires.ftc.teamcode.Actions.ThrowPlaneAction;
+import org.firstinspires.ftc.teamcode.DataPackages.BigRobotArmData;
 
 @TeleOp
 public class ArmTester extends OpMode {

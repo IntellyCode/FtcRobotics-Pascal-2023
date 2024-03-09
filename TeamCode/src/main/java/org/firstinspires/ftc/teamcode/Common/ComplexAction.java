@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Common;
 
-import org.firstinspires.ftc.teamcode.additional.Actions.IAction;
+import org.firstinspires.ftc.teamcode.Actions.IAction;
 
 import java.util.List;
 
