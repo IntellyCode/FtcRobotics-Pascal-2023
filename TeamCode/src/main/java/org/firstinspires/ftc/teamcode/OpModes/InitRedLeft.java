@@ -10,8 +10,8 @@ import org.firstinspires.ftc.teamcode.Camera.Data.TeamPosition;
 import org.firstinspires.ftc.teamcode.DataPackages.FieldConstants;
 
 
-@TeleOp(name = "InitRedRight", group = "Official")
-public class InitRedRight extends OpMode {
+@TeleOp(name = "InitRedLeft", group = "Official")
+public class InitRedLeft extends OpMode {
 
     AutonomousRoutine routine;
     Pose2d initialPose;
@@ -19,7 +19,7 @@ public class InitRedRight extends OpMode {
     public void init() {
         initialPose = new Pose2d(FieldConstants.redRight.getX(),FieldConstants.redRight.getY(),Math.toRadians(90));
         routine = new AutonomousRoutine();
-        routine.init(hardwareMap, telemetry, Team.red, TeamPosition.close);
+        routine.init(hardwareMap, telemetry, Team.red, TeamPosition.far);
     }
 
     @Override
