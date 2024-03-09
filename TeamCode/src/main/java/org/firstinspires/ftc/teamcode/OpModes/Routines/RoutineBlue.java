@@ -52,27 +52,30 @@ public class RoutineBlue {
             TelemetryHelper.getDashboardTelemetry().put("Angle", angleRot);
            finalSequence = new SequencedAction(
                     new OpenSweeper(armData,false),
-                    new SwitchBeltAction(beltData,true),
-                    new WaitAction(200),
-                    new SimultaneousAction(
-                            new WaitAction(100),
-                            new PickupThePixelAction(armData,true,false)
-                    ),
+                   new SwitchBeltAction(beltData,true),
+                   new SimultaneousAction(
+                           new WaitAction(100),
+                           new PickupThePixelAction(armData,true,false)
+                   ),
                     new RotateAction(drive, Math.toRadians(angleRot)),
                     new LiftToAngleBigRobot(armData,15),
                     new ExtendTheArmAction(armData, 100),
                     new LiftToAngleBigRobot(armData,0),
-                    new ReleasePixelAction(armData, true, false),
+                   new SimultaneousAction(
+                           new WaitAction(100),
+                           new ReleasePixelAction(armData, true, false)
+                   ),
+
                     new LiftToAngleBigRobot(armData,15),
                     new ExtendTheArmAction(armData, armData.initialArmLength),
                     new LiftToAngleBigRobot(armData,0),
                     new RotateAction(drive, Math.toRadians(-angleRot)),
                     new SimultaneousAction(
-                            new WaitAction(100),
+                            new WaitAction(50),
                             new PickupThePixelAction(armData,false,true)
                     ),
-                   new MoveToPositionLine(drive,drive.getPoseEstimate(),new Pose2d(2* FieldConstants.cmPerBlock,drive.getPoseEstimate().getY())),
-                   new MoveToPositionLine(drive,new Pose2d(2*FieldConstants.cmPerBlock,drive.getPoseEstimate().getY()),new Pose2d(2*FieldConstants.cmPerBlock,1*FieldConstants.cmPerBlock)),
+                   new MoveToPositionLine(drive,drive.getPoseEstimate(),new Pose2d(1* FieldConstants.cmPerBlock,drive.getPoseEstimate().getY())),
+                   new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,drive.getPoseEstimate().getY()),new Pose2d(1*FieldConstants.cmPerBlock,1*FieldConstants.cmPerBlock)),
                    new RotateAction(drive,Math.toRadians(90)),
                     new LiftToAngleBigRobot(armData,45),
                     new ExtendTheArmAction(armData, 100),
@@ -82,8 +85,8 @@ public class RoutineBlue {
                             new LiftToAngleBigRobot(armData,15,0.1)
                     ),
                     new LiftToAngleBigRobot(armData,0),
-                   new MoveToPositionLine(drive,new Pose2d(2*FieldConstants.cmPerBlock,1*FieldConstants.cmPerBlock),new Pose2d(1*FieldConstants.cmPerBlock,1*FieldConstants.cmPerBlock)),
-                   new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,1*FieldConstants.cmPerBlock),new Pose2d(1*FieldConstants.cmPerBlock,2*FieldConstants.cmPerBlock))
+                   new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,1*FieldConstants.cmPerBlock),new Pose2d(0*FieldConstants.cmPerBlock,1*FieldConstants.cmPerBlock)),
+                   new MoveToPositionLine(drive,new Pose2d(0*FieldConstants.cmPerBlock,1*FieldConstants.cmPerBlock),new Pose2d(0*FieldConstants.cmPerBlock,2*FieldConstants.cmPerBlock))
 
             );
             finalSequence.start();
