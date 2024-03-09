@@ -96,7 +96,7 @@ public class AutonomousRoutine {
                     farSequence,
                     new MoveToPositionLine(drive,initPos,new Pose2d(1* FieldConstants.cmPerBlock,initPos.getY())),
 
-                    new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,initPos.getY()),new Pose2d(1*FieldConstants.cmPerBlock,(1.4+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier)),
+                    new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,initPos.getY()),new Pose2d(1*FieldConstants.cmPerBlock,(1.4+initPos.getY()/FieldConstants.cmPerBlock*coordinateModifier)*FieldConstants.cmPerBlock*coordinateModifier)),
                     new RotateAction(drive,Math.toRadians(90*coordinateModifier)),
                     new LiftToAngleBigRobot(armData,30),
                     new ExtendTheArmAction(armData, 100),
@@ -106,8 +106,8 @@ public class AutonomousRoutine {
                             new LiftToAngleBigRobot(armData,15,0.1)
                     ),
                     new LiftToAngleBigRobot(armData,0),
-                    new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,(1.4+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier),new Pose2d(0,(1.4+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier)),
-                    new MoveToPositionLine(drive,new Pose2d(0,(1.4+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier),new Pose2d(0,(2+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier))
+                    new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,(1.4+initPos.getY()/FieldConstants.cmPerBlock*coordinateModifier)*FieldConstants.cmPerBlock*coordinateModifier),new Pose2d(0,(1.4+initPos.getY()/FieldConstants.cmPerBlock*coordinateModifier)*FieldConstants.cmPerBlock*coordinateModifier)),
+                    new MoveToPositionLine(drive,new Pose2d(0,(1.4+initPos.getY()/FieldConstants.cmPerBlock*coordinateModifier)*FieldConstants.cmPerBlock*coordinateModifier),new Pose2d(0,(2+initPos.getY()/FieldConstants.cmPerBlock*coordinateModifier)*FieldConstants.cmPerBlock*coordinateModifier))
 
             );
             finalSequence.start();
