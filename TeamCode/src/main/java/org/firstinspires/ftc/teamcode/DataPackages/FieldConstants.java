@@ -15,4 +15,5 @@ public class FieldConstants {
     public static final double boardRelPos1 = 15; //cm
     public static final double boardRelPos2 = 30;
     public static final double boardRelPos3 = 45;
+    public static final double initRotAngle = 15; //deg
 }
