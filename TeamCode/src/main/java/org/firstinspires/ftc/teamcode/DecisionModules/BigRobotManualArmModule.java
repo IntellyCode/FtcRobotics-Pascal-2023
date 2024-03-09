@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 import org.firstinspires.ftc.teamcode.Actions.LiftToAngleBigRobot;
 import org.firstinspires.ftc.teamcode.DataPackages.BigRobotArmData;
 

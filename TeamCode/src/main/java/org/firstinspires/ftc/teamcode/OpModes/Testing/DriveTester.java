@@ -4,7 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 import org.firstinspires.ftc.teamcode.Actions.IAction;
 import org.firstinspires.ftc.teamcode.Actions.MoveToPositionSpline;
 import org.firstinspires.ftc.teamcode.Actions.RotateAction;

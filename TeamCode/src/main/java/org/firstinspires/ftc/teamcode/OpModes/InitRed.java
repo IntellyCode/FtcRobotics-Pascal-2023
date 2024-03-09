@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Camera.Camera;
 import org.firstinspires.ftc.teamcode.Camera.Util.RelativePosition;
-import org.firstinspires.ftc.teamcode.Common.Coordinates;
-import org.firstinspires.ftc.teamcode.Common.Team;
-import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.Camera.Data.Coordinates;
+import org.firstinspires.ftc.teamcode.Camera.Data.Team;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 import org.firstinspires.ftc.teamcode.Actions.IAction;
 import org.firstinspires.ftc.teamcode.Actions.MoveToPositionSpline;
 import org.firstinspires.ftc.teamcode.Roadrunner.drive.SampleMecanumDrive;

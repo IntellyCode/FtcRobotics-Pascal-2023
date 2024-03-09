@@ -3,7 +3,7 @@
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 import org.firstinspires.ftc.teamcode.DataPackages.BigRobotDriveData;
 import org.firstinspires.ftc.teamcode.DataPackages.BigRobotSensorData;
 
@@ -87,7 +87,7 @@ package org.firstinspires.ftc.teamcode.DecisionModules;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 
 
 import org.firstinspires.ftc.teamcode.DataPackages.BigRobotDriveData;

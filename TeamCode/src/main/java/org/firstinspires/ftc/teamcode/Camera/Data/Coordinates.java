@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Common;
+package org.firstinspires.ftc.teamcode.Camera.Data;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 

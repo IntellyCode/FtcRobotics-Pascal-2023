@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.Camera.Util.RelativePosition;
-import org.firstinspires.ftc.teamcode.Common.Team;
+import org.firstinspires.ftc.teamcode.Camera.Data.Team;
 import org.firstinspires.ftc.teamcode.Camera.Camera;
 
 public class BigRobotSensorData {

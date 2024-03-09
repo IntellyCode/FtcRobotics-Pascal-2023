@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Actions;
 
-import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;

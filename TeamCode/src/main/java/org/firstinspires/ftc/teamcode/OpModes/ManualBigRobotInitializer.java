@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.DecisionModules.BigRobotManualDrive;
 import org.firstinspires.ftc.teamcode.DecisionModules.BigRobotManualBeltModule;
 import org.firstinspires.ftc.teamcode.DecisionModules.BigRobotManualArmModule;
-import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 
 @TeleOp
 public class ManualBigRobotInitializer extends OpMode {

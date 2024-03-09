@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.Actions;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.DataPackages.BigRobotArmData;
-import org.firstinspires.ftc.teamcode.Common.TelemetryHelper;
+import org.firstinspires.ftc.teamcode.TelemetryHelper;
 
 public class LiftToAngleBigRobot implements IAction {
     BigRobotArmData bigRobotArmData;
