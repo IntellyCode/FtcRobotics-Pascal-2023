@@ -52,8 +52,8 @@ public class AutonomousRoutine {
         beltData = new BigRobotBeltData(hardwareMap);
         drive = new SampleMecanumDrive(hardwareMap);
         if (teamPos == TeamPosition.far){
-            farSequence = new MoveToPositionLine(drive,drive.getPoseEstimate(),new Pose2d(0.2*FieldConstants.cmPerBlock,2*FieldConstants.cmPerBlock*coordinateModifier));
-            initPos = new Pose2d(0.2*FieldConstants.cmPerBlock,2*FieldConstants.cmPerBlock*coordinateModifier);
+            farSequence = new MoveToPositionLine(drive,drive.getPoseEstimate(),new Pose2d(0.25*FieldConstants.cmPerBlock,2*FieldConstants.cmPerBlock*coordinateModifier));
+            initPos = new Pose2d(0.25*FieldConstants.cmPerBlock,2*FieldConstants.cmPerBlock*coordinateModifier);
         } else{
             farSequence = new WaitAction(0);
             initPos = drive.getPoseEstimate();
@@ -79,7 +79,7 @@ public class AutonomousRoutine {
                     new RotateAction(drive, Math.toRadians(angleRot)),
                     new LiftToAngleBigRobot(armData,15),
                     new ExtendTheArmAction(armData, 100),
-                    new LiftToAngleBigRobot(armData,0),
+                    new LiftToAngleBigRobot(armData,0,0.1),
                     new SimultaneousAction(
                             new WaitAction(100),
                             new ReleasePixelAction(armData, true, false)
@@ -95,8 +95,9 @@ public class AutonomousRoutine {
                     ),
                     farSequence,
                     new MoveToPositionLine(drive,initPos,new Pose2d(1* FieldConstants.cmPerBlock,initPos.getY())),
-                    new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,initPos.getY()),new Pose2d(1*FieldConstants.cmPerBlock,1.4*FieldConstants.cmPerBlock*coordinateModifier)),
-                    new RotateAction(drive,Math.toRadians(90)),
+
+                    new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,initPos.getY()),new Pose2d(1*FieldConstants.cmPerBlock,(1.4+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier)),
+                    new RotateAction(drive,Math.toRadians(90*coordinateModifier)),
                     new LiftToAngleBigRobot(armData,30),
                     new ExtendTheArmAction(armData, 100),
                     new ReleasePixelAction(armData, false, true),
@@ -105,8 +106,8 @@ public class AutonomousRoutine {
                             new LiftToAngleBigRobot(armData,15,0.1)
                     ),
                     new LiftToAngleBigRobot(armData,0),
-                    new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,1.4*FieldConstants.cmPerBlock*coordinateModifier),new Pose2d(0,1.4*FieldConstants.cmPerBlock*coordinateModifier)),
-                    new MoveToPositionLine(drive,new Pose2d(0,1.4*FieldConstants.cmPerBlock*coordinateModifier),new Pose2d(0,2*FieldConstants.cmPerBlock*coordinateModifier))
+                    new MoveToPositionLine(drive,new Pose2d(1*FieldConstants.cmPerBlock,(1.4+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier),new Pose2d(0,(1.4+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier)),
+                    new MoveToPositionLine(drive,new Pose2d(0,(1.4+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier),new Pose2d(0,(2+initPos.getY()/FieldConstants.cmPerBlock)*FieldConstants.cmPerBlock*coordinateModifier))
 
             );
             finalSequence.start();
@@ -121,7 +122,7 @@ public class AutonomousRoutine {
     double getAngle(RelativePosition rlp) {
         switch(rlp) {
             case left:
-                return 1* FieldConstants.initRotAngle;
+                return 1*FieldConstants.initRotAngle+5;
             case right:
                 return -1*FieldConstants.initRotAngle;
             case center:
